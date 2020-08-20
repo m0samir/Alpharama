@@ -28,7 +28,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
     </record>
 
 
-     <record id="hr_payroll.structure_base" model="hr.payroll.structure">
+     <record id="hr_payroll_structure_base" model="hr.payroll.structure">
         <field name="code">BASE</field>
         <field name="name">Base for new structures</field>
         <field name="type_id">1</field>
