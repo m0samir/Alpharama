@@ -25,7 +25,6 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                         type="action"
                         string='Loans'>
                     </button>
-                </button>
             </xpath>
          
             <xpath expr="//page//group[@name='active_group']" position="after">
