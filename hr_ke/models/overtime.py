@@ -261,7 +261,7 @@ class EmployeesList(models.Model):
         required=True,
         domain="[('employee_id','=', Emp_name)]")
 
-    @api.one
+
     @api.constrains('worked_hours')
     def overtime_worked_hours(self):
         if self.worked_hours == 0:
