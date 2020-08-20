@@ -33,6 +33,6 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
         <field name="name">Base for new structures</field>
         <field name="type_id">1</field>
         <!-- <field eval="[(6, 0, [ref('hr_payroll.hr_rule_basic'), ref('hr_payroll.hr_rule_taxable'),ref('dev_emp_loan_installment'),ref('dev_emp_loan_interest_installment'),ref('hr_payroll.hr_rule_net')])]" name="rule_ids"/> -->
-        <field name="company_id" ref="base.main_company"/>
+        <!-- <field name="company_id" ref="base.main_company"/> -->
     </record>
 </odoo>
