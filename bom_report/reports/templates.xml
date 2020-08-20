@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <template id="bom_lot_input_report">
+            <t t-call="web.html_container">
+                <!-- <t t-foreach="docs" t-as="o"> -->
+                <div class="row">
+                    <h4>
+                            Input
+</h4>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <table class="table mt16 table-sm o_main_table" style="border:1px solid #ddd; width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">GRADE</th>
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">PIECES</th>
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">PERCENTAGE (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="transfer_input != []">
+                                    <t t-foreach="transfer_input" t-as="o">
+                                        <tr>
+                                            <td style="border:1px solid #ddd; text-align:center; color: #000;">
+                                                <t t-esc="o['product']" />
+                                            </td>
+                                            <td style="border:1px solid #ddd; text-align:center; color: #000;">
+                                                <t t-esc="o['pieces']" />
+                                            </td>
+                                            <td style="border:1px solid #ddd; text-align:center; color: #000;">
+                                                <t t-esc="o['percentage']" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">TOTAL</th>
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">
+                                        <t t-esc="input_total" />
+                                    </th>
+                                    <td style="border:1px solid #ddd; text-align:center; color: #000;"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                        <p>
+                            <strong>Raw WT:</strong>
+                            <t t-esc="total_raw" />
+                            <span>Kgs</span>
+                        </p>
+                        <p>
+                            <strong>No Of Pieces:</strong>
+                            <t t-esc="input_total" />
+                            <span>Pcs</span>
+                        </p>
+                        <p>
+                            <strong>Avg Per Pieces:</strong>
+                            <t t-esc="avg_per_pcs" />
+                            <span>Kgs</span>
+                        </p>
+                    </div>
+                </div>
+                <!-- </t> -->
+            </t>
+        </template>
+
+        <template id="bom_lot_output_report">
+            <t t-call="web.html_container">
+                <!-- <t t-foreach="docs" t-as="o"> -->
+                <div class="row">
+                    <h4>
+                            Output
+</h4>
+                </div>
+                <div class="row">
+                    <table class="table mt16 table-sm o_main_table" style="border:1px solid #ddd; width:100%;">
+                        <thead>
+                            <tr>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">SIZE</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">MP/SUP</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">TR</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">D2</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">V</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">VI</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">D/REJ</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">TOTAL</th>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">PERCENTAGE (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="size" t-as="i">
+                                <tr>
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">
+                                        <t t-esc="i.upper()" />
+                                    </th>
+                                    <t t-foreach="size[i]" t-as="j">
+                                        <td style="border:1px solid #ddd; text-align:center; color: #000;">
+                                            <t t-esc="size[i][j]" />
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">TOTAL</th>
+                                <t t-foreach="col_total" t-as="o">
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">
+                                        <t t-esc="col_total[o]" />
+                                    </th>
+                                </t>
+                            </tr>
+                            <tr>
+                                <th style="border:1px solid #ddd; text-align:center; color: #000;">PERCENTAGE (%)</th>
+                                <t t-foreach="col_percentage" t-as="o">
+                                    <th style="border:1px solid #ddd; text-align:center; color: #000;">
+                                        <t t-esc="o" />
+                                        %
+                                    </th>
+                                </t>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <p>
+                        <strong>Avg Yield:</strong>
+                        <t t-esc="avg_yield" />
+                        <span>SQ.FT/KG</span>
+                    </p>
+                </div>
+                <!-- </t> -->
+            </t>
+        </template>
+
+    </data>
+</odoo>

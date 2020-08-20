@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_mrporder_inherit" inherit_id="mrp.report_mrporder">
+    <data>
+                  <xpath expr="/t/t/t/t/div/table/thead/tr/th[2]" position="after">
+                    <th>
+                      <span>Actual Quantity Consumed</span>
+                    </th>
+                  </xpath>
+                  <xpath expr="/t/t/t/t/div/table/tbody/t/tr/td[2]" position="after">
+                    <td>
+                      <span t-field="raw_line.pwork_order_qconsumed"/>
+                    </td>
+                  </xpath>
+                  <xpath expr="/t/t/t/t/div/table/thead/tr/th[1]" position="after">
+                    <th>
+                      <span>Operations</span>
+                    </th>
+                  </xpath>
+                  <xpath expr="/t/t/t/t/div/table/tbody/t/tr/td[1]" position="after">
+                    <td>
+                      <span t-field="raw_line.pwork_order_operation"/>
+                    </td>
+                  </xpath>
+                  <xpath expr="/t/t/t/t/div/table/thead/tr/th[2]" position="after">
+                    <th>
+                      <span>Time</span>
+                    </th>
+                  </xpath>
+                  <xpath expr="/t/t/t/t/div/table/tbody/t/tr/td[2]" position="after">
+                    <td>
+                      <span t-field="raw_line.pwork_order_time"/>
+                    </td>
+                  </xpath>
+                  <xpath expr="/t/t/t/t/div/table/thead/tr/th[3]" position="after">
+                    <th>
+                      <span>Comments</span>
+                    </th>
+                  </xpath>
+                  <xpath expr="/t/t/t/t/div/table/tbody/t/tr/td[3]" position="after">
+                    <td>
+                      <span t-field="raw_line.pwork_order_comments"/>
+                    </td>
+                  </xpath>
+                </data>
+
+               
+            
+
+    
+</template>
+</odoo>
