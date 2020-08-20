@@ -69,7 +69,6 @@
 				<field name="name">ke.overtime.tree</field>
 				<field name="model">ke.overtime</field>
 				<field name="arch" type="xml">
-						<tree colors="blue: state == 'draft'; black: state == 'approval'; red: state == 'disapproved'">
 								<field name="name"/>
 								<field name="date_from"/>
 								<field name="extra_salary"/>
