@@ -22,6 +22,7 @@
                             <tree editable="bottom">
                                 <field name="name" />
                                 <field name="contract_id" />
+                                <field name="company_id" groups="base.group_multi_company" invisible="1" />
                                 <field name="department_id" />
                                 <field name="job_id" />
                                 <field name="parent_id" />
