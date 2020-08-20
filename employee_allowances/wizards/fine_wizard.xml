@@ -26,6 +26,7 @@
                             <tree editable="bottom">
                                 <field name="name" />
                                 <field name="work_phone" class="o_force_ltr" />
+                                <field name="company_id" groups="base.group_multi_company" invisible="1" />
                                 <field name="work_email" />
                                 <field name="department_id" />
                                 <field name="job_id" />
