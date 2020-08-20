@@ -44,7 +44,7 @@ class InstallmentAnalyticLineView(models.Model):
                                 ('cancel','Cancel')], string='State')
     
     
-    @api.model_cr
+    
     def init(self):
         tools.drop_view_if_exists(self._cr, 'employee_loan_report_view')
         self._cr.execute("""
