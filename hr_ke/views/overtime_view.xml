@@ -15,9 +15,9 @@
 				<field name="arch" type="xml">
 						<form>
 								<header>
-										<button string="Send for Approval" name="overtime_approval" type="object" class="oe_highlight" attrs="{'invisible': ['|',('same_user', '!=', True), ('state', '!=', 'draft')]}"/>
-										<button string="Approve" name="overtime_approved" type="object" class="oe_highlight" groups="hr_ke.group_overtime" attrs="{'invisible': ['|',('same_user', '!=', False), ('state', '!=', 'approval')]}"/>
-										<button string="Disapprove" name="overtime_disapproved"  type="object" groups="hr_ke.group_overtime" class="oe_highlight" attrs="{'invisible': ['|',('same_user', '!=', False), ('state', '!=', 'approval')]}"/>
+										<button string="Send for Approval" name="overtime_approval" type="object" groups="hr_ke.group_overtime_manager" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+										<button string="Approve" name="overtime_approved" type="object" class="oe_highlight" groups="hr_ke.group_overtime_director" attrs="{'invisible': [('state', '!=', 'approval')]}"/>
+										<button string="Disapprove" name="overtime_disapproved"  type="object" groups="hr_ke.group_overtime_director" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'approval')]}"/>
 										<button string="Reset to Draft" name="overtime_reset" type="object" states="approval" class="oe_highlight"/>
 										<field name="state" widget="statusbar" statusbar_visible="draft,approval,approved,disapproved" statusbar_colors="{&quot;draft&quot;:&quot;blue&quot;,&quot;approval&quot;:&quot;blue&quot;,&quot;approved&quot;:&quot;green&quot;}"/>
 								</header>
@@ -27,21 +27,31 @@
 										</group>
 										<group>
 												<group>
-														<field name="same_user" invisible="1"/>
-														<!--	<field name="same_dept" invisible="0"/> -->
-														<field name="employee_id" options="{'no_quick_create':True, 'no_open': True}"/>
-														<field name="date_from"/>
-														<!--        <field name="dept_id"/> -->
+													<field name="same_user" invisible="1"/>
+													<field name="date_from"/>
 												</group>
 												<group>
-														<field name="contract_id" options="{'no_quick_create':True, 'no_open': True}"/>
-														<field name="date_to"/>
+													<field name="extra_salary"/>
 												</group>
 										</group>
-										<group>
-												<field name="hours" widget="float_time"/>
-										</group>
 										<notebook>
+											<page string="Employee Details">
+											  <field name="employee_list_ids">
+												  <tree editable="bottom">
+													  <field name="Emp_name" required="1" options="{'no_quick_create':True, 'no_open': True}"/>
+													  <field name="contract_id" required="1" options="{'no_quick_create':True, 'no_open': True}"/>
+													  <field name="worked_hours" required="1"/>
+												  </tree>
+
+												  <form>
+												  <group>
+														<field name="Emp_name"/>
+													  	<field name="contract_id"/>
+														<field name="worked_hours"/>
+												  </group>
+												  </form>
+											  </field>
+											</page>
 												<page string="Work Details">
 														<field name="description"/>
 												</page>
@@ -59,11 +69,10 @@
 				<field name="name">ke.overtime.tree</field>
 				<field name="model">ke.overtime</field>
 				<field name="arch" type="xml">
-						<tree>
+						<tree colors="blue: state == 'draft'; black: state == 'approval'; red: state == 'disapproved'">
 								<field name="name"/>
-								<field name="dept_id"/>
-								<field name="employee_id"/>
-								<field name="hours"/>
+								<field name="date_from"/>
+								<field name="extra_salary"/>
 								<field name="state"/>
 						</tree>
 				</field>

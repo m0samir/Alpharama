@@ -32,11 +32,15 @@
 # © 2016 Bernard K Too<bernard.too@optima.co.ke>
 """
 import logging
-from datetime import datetime
+import datetime
+from datetime import datetime, date, time
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from dateutil.relativedelta import relativedelta
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT, DEFAULT_SERVER_DATE_FORMAT
+import dateutil.parser
 LOGGER = logging.getLogger(__name__)
+import pdb
 
 
 class KeDepartment(models.Model):
@@ -55,19 +59,8 @@ class KeOvertime(models.Model):
     _name = "ke.overtime"
     _description = "Overtime Request"
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
-    #_inherit = ['mail.channel']
+    # _inherit = ['mail.channel']
     _order = "id desc"
-
-    @api.depends('date_from', 'date_to')
-    def compute_hours(self):
-        """ calculates hours between two dates"""
-        for rec in self:
-            diff = rec.date_to - rec.date_from
-            #diff = datetime.strptime(rec.date_to, DEFAULT_SERVER_DATETIME_FORMAT) - datetime.strptime(rec.date_from, DEFAULT_SERVER_DATETIME_FORMAT)
-            rec.hours = (diff.days * 24) + (diff.seconds / 3600)
-            if rec.hours < 0:
-                raise ValidationError(
-                    "'End Date' is older than 'Start Date' in time entry. Please correct this")
 
     def default_date(self):
         """ returns today's date and time """
@@ -77,14 +70,14 @@ class KeOvertime(models.Model):
     def _employee_get(self):
         return self.employee_id.search(
             [('user_id', '=', self.env.user.id)], limit=1).id
-    
+
     
     def check_login_user(self):
         """ sets boolean value depending on the login user """
         for record in self:
             record.same_user = bool(record.env.user.id == record.user_id.id)
 
-
+    
     def check_user_dept(self):
         """ sets boolean value depending on user department """
         for record in self:
@@ -104,7 +97,7 @@ class KeOvertime(models.Model):
         'Employee Name',
         track_visibility='always',
         default=_employee_get,
-        required=True,
+        required=False,
         readonly=True,
         states={
             'draft': [
@@ -125,7 +118,7 @@ class KeOvertime(models.Model):
                              'Status',
                              default='draft', track_visibility='onchange')
     date_from = fields.Datetime(
-        'Date From',
+        'Date',
         required=True,
         readonly=True,
         states={
@@ -134,19 +127,23 @@ class KeOvertime(models.Model):
                  False)]},
         default=default_date,
         track_visibility='onchange')
-    date_to = fields.Datetime(
-        'Date To',
-        required=True,
-        readonly=True,
-        states={
-            'draft': [
-                ('readonly',
-                 False)]},
-        default=default_date,
-        track_visibility='onchange')
+    extra_salary = fields.Many2one("extra.salary",
+                                   string='Overtime Rate',
+                                   required=True,
+                                   readonly=True,
+                                   states={
+                                                'draft': [
+                                                    ('readonly',
+                                                     False)]},
+                                   track_visibility='onchange')
     hours = fields.Float(
         'Hours',
-        compute='compute_hours',
+        required=False,
+        readonly=True,
+        states={
+            'draft': [
+                ('readonly',
+                 False)]},
         store=True,
         track_visibility='onchange')
     description = fields.Html(
@@ -156,8 +153,18 @@ class KeOvertime(models.Model):
     contract_id = fields.Many2one(
         'hr.contract',
         'Contract',
-        required=True,
+        required=False,
         domain="[('employee_id','=', employee_id)]",
+        readonly=True,
+        states={
+            'draft': [
+                ('readonly',
+                 False)]}, track_visibility='always')
+    employee_list_ids = fields.One2many(
+        'emp.list',
+        'employee_list_id',
+        string='Employees List',
+        required=True,
         readonly=True,
         states={
             'draft': [
@@ -166,47 +173,67 @@ class KeOvertime(models.Model):
     same_user = fields.Boolean(compute='check_login_user')
     same_dept = fields.Boolean(compute='check_user_dept')
 
+    # @api.depends('date_from', 'date_to')
+    # def _total_minutes(self):
+    #     if self.date_from or self.date_to:
+    #         start_dt = fields.Datetime.from_string(self.date_from)
+    #         finish_dt = fields.Datetime.from_string(self.date_to)
+    #         difference = relativedelta(finish_dt, start_dt)
+    #         hours = difference.hours or 0
+    #         days = difference.days*24 or 0
+    #         minui = difference.minutes/60 or 0
+    #         self.hours = hours + days + minui
+    #
+    #         if self.hours < 0:
+    #             raise ValidationError(
+    #                     "'End Date' is older than 'Start Date' in time entry. Please correct this")
+
     
     def overtime_approval(self):
         """Send a request for approval"""
-        for record in self:
-            if not record.employee_id:
+        for rec in self:
+            if not rec.employee_list_ids:
                 raise ValidationError('Missing Employee record')
-            elif not record.employee_id.parent_id:
-                raise ValidationError(
-                    'Your manager is not added in your HR records,\
-                            no one to approve your Overtime request.Please consult HR')
-            elif not record.employee_id.parent_id.user_id:
-                raise ValidationError(
-                    'Your manager does have access to the HR system\
-                            to approve your overtime request. Please consult HR')
-            else:
-                # record._subscribe_users(
-                # user_ids=[record.employee_id.parent_id.user_id.id])
-                return record.write({'state': 'approval'})
+            for record in rec.employee_list_ids:
+                if not record.Emp_name.parent_id:
+                    raise ValidationError(
+                        'Your manager is not added in your HR records,\
+                                no one to approve your Overtime request.Please consult HR')
+                elif not record.Emp_name.parent_id.user_id:
+                    raise ValidationError(
+                        'Your manager does have access to the HR system\
+                                to approve your overtime request. Please consult HR')
+            return rec.write({'state': 'approval'})
 
-
+    
     def overtime_approved(self):
         """ Approves the overtime request """
-        for record in self:
-            allowance_type = self.env.ref('hr_ke.ke_cash_allowance3')
-            if not allowance_type:
-                raise ValidationError(
-                    'No salary rule found for processing overtime\
-                            allowances in your payroll system!')
-            values = {
-                'cash_allowance_id': allowance_type.id,
-                'contract_id': record.contract_id.id,
-                'computation': 'fixed',
-                'rule_id': allowance_type.rule_id.id,
-                'fixed': record.hours * record.dept_id.overtime
-            }
-            if values:
-                self.env['ke.cash_allowances'].create(values)
-            else:
-                raise ValidationError(
-                    'Missing Overtime details. Please consult HR')
-            record.write({'state': 'approved'})
+        for rec in self:
+            for record in rec.employee_list_ids:
+                allowance_type = self.env.ref('hr_ke.ke_cash_allowance3')
+                if not allowance_type:
+                    raise ValidationError(
+                        'No salary rule found for processing overtime\
+                                allowances in your payroll system!')
+                hourly_rate = 0
+                if record.contract_id.rem_type in ['monthly']:
+                    hourly_rate = (record.contract_id.wage / 240) * record.employee_list_id.extra_salary.name
+                elif record.contract_id.rem_type in ['daily']:
+                    hourly_rate = (record.contract_id.wage / 8) * record.employee_list_id.extra_salary.name
+                values = {
+                    'cash_allowance_id': allowance_type.id,
+                    'contract_id': record.contract_id.id,
+                    'computation': 'fixed',
+                    'rule_id': allowance_type.rule_id.id,
+                    'fixed': record.worked_hours * hourly_rate
+                }
+                # employee = self.env['hr.employee'].browse(employee_id)
+                if values:
+                    self.env['ke.cash_allowances'].create(values)
+                else:
+                    raise ValidationError(
+                        'Missing Overtime details. Please consult HR')
+                record.employee_list_id.write({'state': 'approved'})
 
     
     def overtime_disapproved(self):
@@ -219,3 +246,30 @@ class KeOvertime(models.Model):
         """ Resets an overtime request currently waiting approval"""
         for record in self:
             record.write({'state': 'draft'})
+
+
+class EmployeesList(models.Model):
+    _name = "emp.list"
+    _description = "Employees List"
+
+    employee_list_id = fields.Many2one('ke.overtime')
+    Emp_name = fields.Many2one('hr.employee', string="Employee Name")
+    worked_hours = fields.Float('Worked Hours')
+    contract_id = fields.Many2one(
+        'hr.contract',
+        'Contract',
+        required=True,
+        domain="[('employee_id','=', Emp_name)]")
+
+    @api.one
+    @api.constrains('worked_hours')
+    def overtime_worked_hours(self):
+        if self.worked_hours == 0:
+            raise ValidationError('Please Enter a Valid Worked Hours')
+
+
+class ExtraSalary(models.Model):
+    _name = "extra.salary"
+    _description = "Extra Salary"
+
+    name = fields.Float("Extra Salary")
