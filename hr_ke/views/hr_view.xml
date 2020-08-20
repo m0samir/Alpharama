@@ -460,7 +460,7 @@
             <attribute name="required">True</attribute>
           </xpath>
           <xpath expr="//field[@name='birthday']" position="attributes">
-            <attribute name="required">True</attribute>
+            <attribute name="required">False</attribute>
           </xpath>
           <xpath expr="//field[@name='department_id']" position="attributes">
             <attribute name="required">True</attribute>
