@@ -18,7 +18,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
          <field name="model">hr.employee</field>
          <field name="inherit_id" ref="hr.view_employee_form"/>
          <field name="arch" type="xml">
-         	<button name="hr_presence_button" position="after">
+         	<xpath expr="//button[@id='hr_presence_button']" position="after">
                     <button name="%(act_hr_employee_loan_list)d"
                         class="oe_stat_button"
                         icon="fa-credit-card"
@@ -26,6 +26,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                         string='Loans'>
                     </button>
                 </button>
+            </xpath>
          
             <xpath expr="//page//group[@name='active_group']" position="after">
                 <group string="Loan" name="hr_loan">
