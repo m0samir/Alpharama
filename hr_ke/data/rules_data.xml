@@ -5,7 +5,7 @@
       <field name="name">Basic Pay</field>
       <field name="code">P001</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>  
+      <field name="struct_id">4</field>  
       <field name="sequence">1</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
@@ -45,7 +45,7 @@ result =  payslip.paid_amount
       <field name="name">Basic Wage -PH</field>
       <field name="code">P002</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="sequence">2</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
@@ -87,7 +87,7 @@ result = worked_days.PH.number_of_hours * PH_RATE
       <field name="code">P003</field>
       <field name="name">Basic Wage -PD</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -128,7 +128,7 @@ result = worked_days.PD.number_of_days * PD_RATE
       <field name="code">P004</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -168,7 +168,7 @@ result = 0
       <field name="code">P005</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -208,7 +208,7 @@ result = 0
       <field name="code">P006</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -248,7 +248,7 @@ result = 0
       <field name="code">P007</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -288,7 +288,7 @@ result = 0
       <field name="code">P008</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -328,7 +328,7 @@ result = 0
       <field name="code">P009</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category1"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -368,7 +368,7 @@ result = 0
       <field name="code">P010</field>
       <field name="name">Basic Pay</field>
       <field name="category_id" ref="ke_category2"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -408,7 +408,7 @@ result = categories.C001 ##Basic Pay Category
       <field name="code">P011</field>
       <field name="name">Bonus</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -449,7 +449,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P012</field>
       <field name="name">Commission</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -490,7 +490,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P013</field>
       <field name="name">Overtime Allowances</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -531,7 +531,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P014</field>
       <field name="name">Transport Allowances</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -572,7 +572,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P015</field>
       <field name="name">Leave Pay</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -613,7 +613,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P016</field>
       <field name="name">Directors Fee</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -654,7 +654,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P017</field>
       <field name="name">House Allowances</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -695,7 +695,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P018</field>
       <field name="name">Lump Sum Pay</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -736,7 +736,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P019</field>
       <field name="name">Other Allowances</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -777,7 +777,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P020</field>
       <field name="name">Global Income (Non Full Time Dir.)</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -818,7 +818,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P021</field>
       <field name="name">Per Diem</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -860,7 +860,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P022</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -901,7 +901,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P023</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -942,7 +942,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P024</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category3"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -983,7 +983,7 @@ result = sum([x.amount for x in contract.cash_allowances.search([('rule_id', '='
       <field name="code">P025</field>
       <field name="name">Total Cash Allowances</field>
       <field name="category_id" ref="ke_category4"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -1023,7 +1023,7 @@ result = categories.C003 ##Cash Allowances Category
       <field name="code">P026</field>
       <field name="name">Gross Pay (Basic + Allowances)</field>
       <field name="category_id" ref="ke_category5"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -1063,7 +1063,7 @@ result = categories.C001 + categories.C003 ##Basic Pay + Allowances
       <field name="code">P027</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category5"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1103,7 +1103,7 @@ result = 0
       <field name="code">P028</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category5"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1143,7 +1143,7 @@ result = 0
       <field name="code">P029</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category5"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1183,7 +1183,7 @@ result = 0
       <field name="code">P030</field>
       <field name="name">Gross Pay</field>
       <field name="category_id" ref="ke_category6"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1223,7 +1223,7 @@ result = categories.C005 ##Gross Pay Category
       <field name="code">P031</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category7"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1264,7 +1264,7 @@ result = sum([x.amount for x in contract.benefits.search([('rule_id', '=',  rule
       <field name="code">P032</field>
       <field name="name">Water</field>
       <field name="category_id" ref="ke_category7"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1305,7 +1305,7 @@ result = sum([x.amount for x in contract.benefits.search([('rule_id', '=',  rule
       <field name="code">P033</field>
       <field name="name">Electricity</field>
       <field name="category_id" ref="ke_category7"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1346,7 +1346,7 @@ result = sum([x.amount for x in contract.benefits.search([('rule_id', '=',  rule
       <field name="code">P034</field>
       <field name="name">Telephone</field>
       <field name="category_id" ref="ke_category7"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1387,7 +1387,7 @@ result = sum([x.amount for x in contract.benefits.search([('rule_id', '=',  rule
       <field name="code">P035</field>
       <field name="name">Servants</field>
       <field name="category_id" ref="ke_category7"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1428,7 +1428,7 @@ result = sum([x.amount for x in contract.benefits.search([('rule_id', '=',  rule
       <field name="code">P036</field>
       <field name="name">Security Services</field>
       <field name="category_id" ref="ke_category7"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1470,7 +1470,7 @@ result = sum([x.amount for x in contract.benefits.search([('rule_id', '=',  rule
       <field name="code">P037</field>
       <field name="name">Total Non Cash Benefits</field>
       <field name="category_id" ref="ke_category8"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1510,7 +1510,7 @@ result = categories.C007 ##Sum of all non Cash benefits excluding motor vehicle 
       <field name="code">P038</field>
       <field name="name">Motor Vehicle</field>
       <field name="category_id" ref="ke_category36"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1581,7 +1581,7 @@ result = CAR_BENEFIT
       <field name="code">P039</field>
       <field name="name">Housing</field>
       <field name="category_id" ref="ke_category36"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1637,7 +1637,7 @@ else:
       <field name="code">P040</field>
       <field name="name">Total Housing and Motor vehicle</field>
       <field name="category_id" ref="ke_category8"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -1677,7 +1677,7 @@ result = categories.C036 ##Special category for Housing and Car benefit rule
       <field name="code">P041</field>
       <field name="name">Gross Taxable Income</field>
       <field name="category_id" ref="ke_category9"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -1718,7 +1718,7 @@ result = categories.C006 + categories.C036 + (categories.C007 > 3000 and categor
       <field name="code">P042</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category9"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1758,7 +1758,7 @@ result = 0
       <field name="code">P043</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category9"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1798,7 +1798,7 @@ result = 0
       <field name="code">P044</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category9"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1838,7 +1838,7 @@ result = 0
       <field name="code">P045</field>
       <field name="name">Gross Taxable Pay</field>
       <field name="category_id" ref="ke_category10"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1878,7 +1878,7 @@ result = categories.C009
       <field name="code">P046</field>
       <field name="name">NSSF Tier I</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1929,7 +1929,7 @@ result = nssf
       <field name="code">P047</field>
       <field name="name">NSSF Tier II</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -1982,7 +1982,7 @@ result = nssf
       <field name="code">P048</field>
       <field name="name">NSSF Tier III</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2022,7 +2022,7 @@ result = 0
       <field name="code">P049</field>
       <field name="name">NSSF Voluntary Contributions</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2062,7 +2062,7 @@ result = employee.nssf_vol_mem
       <field name="code">P050</field>
       <field name="name">NSSF (Employee)</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2112,7 +2112,7 @@ result = 0.5 * NSSF
       <field name="code">P051</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2151,7 +2151,7 @@ result = 0
       <field name="code">P052</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2191,7 +2191,7 @@ result = 0
       <field name="code">P053</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2231,7 +2231,7 @@ result = 0
       <field name="code">P054</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category11"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2271,7 +2271,7 @@ result = 0
       <field name="code">P055</field>
       <field name="name">Total NSSF</field>
       <field name="category_id" ref="ke_category12"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2310,7 +2310,7 @@ result = categories.C011
       <field name="sequence">56</field>
       <field name="code">P056</field>
       <field name="name">NSSF Tier I - Employer</field>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="category_id" ref="ke_category13"/>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
@@ -2363,7 +2363,7 @@ result = nssf
       <field name="code">P057</field>
       <field name="name">NSSF Tier II - Employer</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -2415,7 +2415,7 @@ result = nssf
       <field name="code">P058</field>
       <field name="name">NSSF Tier III - Employer</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -2455,7 +2455,7 @@ result = employee.nssf_t3_emp
       <field name="code">P059</field>
       <field name="name">NSSF Voluntary Contributions - Employer</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -2495,7 +2495,7 @@ result = employee.nssf_vol_emp
       <field name="code">P060</field>
       <field name="name">NSSF (Employer)</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -2548,7 +2548,7 @@ result = 0.5 * NSSF
       <field name="code">P061</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2588,7 +2588,7 @@ result = 0
       <field name="code">P062</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2628,7 +2628,7 @@ result = 0
       <field name="code">P063</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2668,7 +2668,7 @@ result = 0
       <field name="code">P064</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category13"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2707,7 +2707,7 @@ result = 0
       <field name="sequence">65</field>
       <field name="code">P065</field>
       <field name="name">Total NSSF Contributions -Employer</field>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="category_id" ref="ke_category14"/>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
@@ -2748,7 +2748,7 @@ result = categories.C013
       <field name="code">P066</field>
       <field name="name">Pension/Provident Fund Scheme</field>
       <field name="category_id" ref="ke_category15"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2794,7 +2794,7 @@ result = min(ACTUAL_CONTIBUTION, PERMISSIBLE_LIMIT, PERCENTAGE * GROSS_PAY)
       <field name="code">P067</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category15"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2834,7 +2834,7 @@ result = 0
       <field name="code">P068</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category15"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2874,7 +2874,7 @@ result = 0
       <field name="code">P069</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category15"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -2914,7 +2914,7 @@ result = 0
       <field name="code">P070</field>
       <field name="name">Total Pension/Provident Fund</field>
       <field name="category_id" ref="ke_category16"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -2954,7 +2954,7 @@ result = categories.C015
       <field name="code">P071</field>
       <field name="name">H.O.S.P</field>
       <field name="category_id" ref="ke_category17"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -2999,7 +2999,7 @@ result = min(HOSP_LIMIT, ACTUAL_DEPOSIT)
       <field name="code">P072</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category17"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3039,7 +3039,7 @@ result = 0
       <field name="code">P073</field>
       <field name="name">Mortgage Interest</field>
       <field name="category_id" ref="ke_category18"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -3085,7 +3085,7 @@ result = min(MI_LIMIT, ACTUAL_INTEREST)
       <field name="code">P074</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category18"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3125,7 +3125,7 @@ result = 0
       <field name="code">P075</field>
       <field name="name">H.O.S.P or Mortgage Interest Deducted</field>
       <field name="category_id" ref="ke_category19"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3165,7 +3165,7 @@ result = max(categories.C017, categories.C018)
       <field name="code">P076</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category20"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3205,7 +3205,7 @@ result = 0
       <field name="code">P077</field>
       <field name="name">PWD Deductions</field>
       <field name="category_id" ref="ke_category20"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3250,7 +3250,7 @@ result = EXEMPTION + min(MAX_ADD_EXEMPTION, ADDITIONAL_EXEMPTION)
       <field name="code">P078</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category20"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3290,7 +3290,7 @@ result = 0
       <field name="code">P079</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category20"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3330,7 +3330,7 @@ result = 0
       <field name="code">P080</field>
       <field name="name">Total Allowed Deductions</field>
       <field name="category_id" ref="ke_category21"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -3370,7 +3370,7 @@ result = categories.C020 ##Allowed deductions Category
       <field name="code">P081</field>
       <field name="name">Taxable Pay</field>
       <field name="category_id" ref="ke_category22"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -3412,7 +3412,7 @@ result = max(0, taxable) ##for negative result, set taxable pay = 0
       <field name="code">P082</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category22"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3452,7 +3452,7 @@ result = 0
       <field name="code">P083</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category22"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3492,7 +3492,7 @@ result = 0
       <field name="code">P084</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category22"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3532,7 +3532,7 @@ result = 0
       <field name="code">P085</field>
       <field name="name">Net Taxable Pay</field>
       <field name="category_id" ref="ke_category23"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3572,7 +3572,7 @@ result = categories.C022
       <field name="code">P086</field>
       <field name="name">P.A.Y.E</field>
       <field name="category_id" ref="ke_category24"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -3638,7 +3638,7 @@ result = tax
       <field name="code">P087</field>
       <field name="name">W.H.T</field>
       <field name="category_id" ref="ke_category24"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3689,7 +3689,7 @@ else:
       <field name="code">P088</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category24"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3729,7 +3729,7 @@ result = 0
       <field name="code">P089</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category24"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3769,7 +3769,7 @@ result = 0
       <field name="code">P090</field>
       <field name="name">Tax Payable</field>
       <field name="category_id" ref="ke_category25"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3809,7 +3809,7 @@ result = categories.C024
       <field name="code">P091</field>
       <field name="name">Personal Tax Relief</field>
       <field name="category_id" ref="ke_category26"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -3853,7 +3853,7 @@ result = PERSONAL_RELIEF
       <field name="code">P092</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category26"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3893,7 +3893,7 @@ result = 0
       <field name="code">P093</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category26"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3933,7 +3933,7 @@ result = 0
       <field name="code">P094</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category26"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -3973,7 +3973,7 @@ result = 0
       <field name="code">P095</field>
       <field name="name">Tax Relief </field>
       <field name="category_id" ref="ke_category27"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4013,7 +4013,7 @@ result = categories.C026
       <field name="code">P096</field>
       <field name="name">Insurance Relief</field>
       <field name="category_id" ref="ke_category28"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -4061,7 +4061,7 @@ else:
       <field name="code">P097</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category28"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4101,7 +4101,7 @@ result = 0
       <field name="code">P098</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category28"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4141,7 +4141,7 @@ result = 0
       <field name="code">P099</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category28"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4181,7 +4181,7 @@ result = 0
       <field name="code">P100</field>
       <field name="name">Total Insurance Relief</field>
       <field name="category_id" ref="ke_category29"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4221,7 +4221,7 @@ result = categories.C028
       <field name="code">P101</field>
       <field name="name">Net P.A.Y.E</field>
       <field name="category_id" ref="ke_category30"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -4262,7 +4262,7 @@ result = max(0, net_tax)  ##if net tax is negative, set result = 0
       <field name="code">P102</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category30"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4302,7 +4302,7 @@ result = 0
       <field name="code">P103</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category30"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4342,7 +4342,7 @@ result = 0
       <field name="code">P104</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category30"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4382,7 +4382,7 @@ result = 0
       <field name="code">P105</field>
       <field name="name">Net Tax Payable</field>
       <field name="category_id" ref="ke_category31"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4422,7 +4422,7 @@ result = categories.C030
       <field name="code">P106</field>
       <field name="name">N.H.I.F</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4502,7 +4502,7 @@ result = nhif
       <field name="code">P107</field>
       <field name="name">H.E.L.B</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4542,7 +4542,7 @@ result = employee.helb_rate
       <field name="code">P108</field>
       <field name="name">Salary Advance</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4583,7 +4583,7 @@ result = sum([x.amount for x in employee.deductions.search([('rule_id', '=',  ru
       <field name="code">P109</field>
       <field name="name">SACCO</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4624,7 +4624,7 @@ result = sum([x.amount for x in employee.deductions.search([('rule_id', '=',  ru
       <field name="code">P110</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4665,7 +4665,7 @@ result = sum([x.amount for x in employee.deductions.search([('rule_id', '=',  ru
       <field name="code">P111</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4706,7 +4706,7 @@ result = sum([x.amount for x in employee.deductions.search([('rule_id', '=',  ru
       <field name="code">P112</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4747,7 +4747,7 @@ result = sum([x.amount for x in employee.deductions.search([('rule_id', '=',  ru
       <field name="code">P113</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4788,7 +4788,7 @@ result = sum([x.amount for x in employee.deductions.search([('rule_id', '=',  ru
       <field name="code">P114</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category32"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4829,7 +4829,7 @@ result = sum([x.amount for x in employee.deductions.search([('rule_id', '=',  ru
       <field name="code">P115</field>
       <field name="name">Total Post-Tax Deductions</field>
       <field name="category_id" ref="ke_category33"/>
-      <field name="struct_id">1</field> 
+      <field name="struct_id">4</field> 
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -4869,7 +4869,7 @@ result = categories.C032
       <field name="code">P116</field>
       <field name="name">Net Pay</field>
       <field name="category_id" ref="ke_category34"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="False"/>
       <field name="condition_select">python</field>
@@ -4911,7 +4911,7 @@ result = result = categories.C006 - categories.C031 - categories.C033 - categori
       <field name="code">P117</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category34"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4951,7 +4951,7 @@ result = 0
       <field name="code">P118</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category34"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -4991,7 +4991,7 @@ result = 0
       <field name="code">P119</field>
       <field name="name">FOR FUTURE USE</field>
       <field name="category_id" ref="ke_category34"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
@@ -5031,7 +5031,7 @@ result = 0
       <field name="code">P120</field>
       <field name="name">Net Pay</field>
       <field name="category_id" ref="ke_category35"/>
-      <field name="struct_id">1</field>
+      <field name="struct_id">4</field>
       <field name="active" eval="True"/>
       <field name="appears_on_payslip" eval="True"/>
       <field name="condition_select">python</field>
