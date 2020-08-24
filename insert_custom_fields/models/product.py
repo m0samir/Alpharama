@@ -9,9 +9,9 @@ from operator import itemgetter
 from odoo import api, fields, models, _
 
 
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+class ProductProduct(models.Model):
+    _inherit = "product.product"
     
-    pt_no_of_pieces = fields.Float(related = 'product_variant_id.stock_move_ids.mno_of_pieces', string='Total Pieces', store=True)
+    pt_no_of_pieces = fields.Float(string='Total Pieces', store=True)
    
     

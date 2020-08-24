@@ -20,7 +20,7 @@
         'views/stock_production_lot_views.xml',
         'views/stock_picking_views.xml',
         'views/stock_move_line_views.xml',
-		'views/product_template_views.xml',
+		'views/product_views.xml',
         'report/mrp_production_templates.xml',
       
 		
