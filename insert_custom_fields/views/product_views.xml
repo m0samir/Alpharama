@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="product_variant_easy_edit_view" model="ir.ui.view">
-            <field name="name">	product.product.view.form.easy</field>
+    <record id="product_normal_form_view" model="ir.ui.view">
+            <field name="name">product.product.form</field>
             <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
                 <data>
-                  <xpath expr="//form[1]/sheet[1]/group[2]/group[@name='weight']/label[1]" position="before">
+                    <xpath expr="//field[@name='uom_po_id']" position="after">
                         <field name="pt_no_of_pieces" force_save='1'/>
                     </xpath>
                 </data>
