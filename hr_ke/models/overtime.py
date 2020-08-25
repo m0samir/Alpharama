@@ -217,9 +217,9 @@ class KeOvertime(models.Model):
                                 allowances in your payroll system!')
                 hourly_rate = 0
                 if record.contract_id.rem_type in ['monthly']:
-                    hourly_rate = (record.contract_id.wage / 240) * record.employee_list_id.extra_salary.name
+                    hourly_rate = (record.contract_id.wage / 195) * record.employee_list_id.extra_salary.name
                 elif record.contract_id.rem_type in ['daily']:
-                    hourly_rate = (record.contract_id.wage / 8) * record.employee_list_id.extra_salary.name
+                    hourly_rate = (record.contract_id.wage / 7.5) * record.employee_list_id.extra_salary.name
                 values = {
                     'cash_allowance_id': allowance_type.id,
                     'contract_id': record.contract_id.id,
