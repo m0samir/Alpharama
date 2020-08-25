@@ -2,10 +2,10 @@
 <odoo>
     <data noupdate="0">
         <record id="employee_fine_allocation_form" model="ir.ui.view">
-            <field name="name">Employee Fine Allocation Form</field>
+            <field name="name">Employee Deductions Allocation Form</field>
             <field name="model">fine.allocation</field>
             <field name="arch" type="xml">
-                <form string="Employee Fine">
+                <form string="Employee Deductions">
                     <group>
                         <span colspan="4" nolabel="1">Use this form to allocate after tax deductions to Employee(s).</span>
                     </group>
@@ -37,7 +37,7 @@
                     </group>
 
                     <footer>
-                        <button name="action_allocate_fine" string="Allocate Fines" type="object" class="btn-primary" />
+                        <button name="action_allocate_fine" string="Allocate" type="object" class="btn-primary" />
                         <button string="Cancel" class="btn-secondary" special="cancel" />
                     </footer>
                 </form>
@@ -45,7 +45,7 @@
         </record>
 
         <record id="employee_fine_allocation" model="ir.actions.act_window">
-            <field name="name">Employee Fine Allocation</field>
+            <field name="name">Employee Deductions Allocation</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">fine.allocation</field>
             <field name="view_mode">form</field>
