@@ -12,6 +12,11 @@
 					<field name="work_order_time"/>
 					<field name="work_order_comments"/>
 				</xpath>
+                <data>
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='routing_id']" position="after">
+                    <field name="tot_pieces"/>
+                </xpath>
+                </data> 
 			</field>
 		</record>
     </data>
