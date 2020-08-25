@@ -7,7 +7,7 @@
 			<field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
 			<field name="arch" type="xml">
 				<xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='bom_line_ids']/tree[1]/field[@name='product_uom_id']" position="after">
-					<!--field name="no_of_pieces"/>-->
+					<field name="no_of_pieces"/>
                     <field name="work_order_operation"/>
 					<field name="work_order_time"/>
 					<field name="work_order_comments"/>
