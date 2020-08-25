@@ -273,31 +273,33 @@ class KEDeductions(models.Model):
     
     @api.depends('write_date')
     def compute_name(self):
-        self.name = str(self.deduction_id.name) + \
-            ' (' + str(self.employee_id.name) + ')'
+        for rec in self:
+            rec.name = str(rec.deduction_id.name) + \
+                ' (' + str(rec.employee_id.name) + ')'
 
     
     @api.depends('computation', 'fixed')
     def compute_deduction(self):
-        if self.computation == 'fixed':
-            self.amount = self.fixed
+        for rec in self:
+            if rec.computation == 'fixed':
+                rec.amount = rec.fixed
 
-        elif self.computation == 'formula':
-            baselocaldict = {
-                'result': None,
-                'employee': self.employee_id,
-                'deduction': self}
-            localdict = dict(baselocaldict)
-            try:
-                Eval(self.formula, localdict, mode='exec', nocopy=True)
-            except BaseException:
-                raise ValidationError(
-                    _('Error in the formula defined for this\
-                      deduction: %s\n [%s].') %
-                    (self.name, self.formula))
-            self.amount = localdict['result']
-        else:
-            self.amount = 0.00
+            elif rec.computation == 'formula':
+                baselocaldict = {
+                    'result': None,
+                    'employee': rec.employee_id,
+                    'deduction': rec}
+                localdict = dict(baselocaldict)
+                try:
+                    Eval(rec.formula, localdict, mode='exec', nocopy=True)
+                except BaseException:
+                    raise ValidationError(
+                        _('Error in the formula defined for this\
+                          deduction: %s\n [%s].') %
+                        (rec.name, rec.formula))
+                rec.amount = localdict['result']
+            else:
+                rec.amount = 0.00
 
     def _default_formula(self):
         return """
@@ -487,27 +489,29 @@ class KECashAllowances(models.Model):
     
     @api.depends('computation', 'fixed')
     def compute_cash_allowance(self):
-        if self.computation == 'fixed':
-            self.amount = self.fixed
-        elif self.computation == 'formula':
-            baselocaldict = {'result': None, 'contract': self.contract_id}
-            localdict = dict(baselocaldict)
-            try:
-                Eval(self.formula, localdict, mode='exec', nocopy=True)
-            except BaseException:
-                raise ValidationError(
-                    _('Wrong formula defined for Cash Allowances: %s\n [%s].') %
-                    (self.name, self.formula))
-            self.amount = localdict['result']
+        for rec in self:
+            if rec.computation == 'fixed':
+                rec.amount = rec.fixed
+            elif rec.computation == 'formula':
+                baselocaldict = {'result': None, 'contract': rec.contract_id}
+                localdict = dict(baselocaldict)
+                try:
+                    Eval(rec.formula, localdict, mode='exec', nocopy=True)
+                except BaseException:
+                    raise ValidationError(
+                        _('Wrong formula defined for Cash Allowances: %s\n [%s].') %
+                        (rec.name, rec.formula))
+                rec.amount = localdict['result']
 
-        else:
-            self.amount = 0.00
+            else:
+                rec.amount = 0.00
 
     
     @api.depends('write_date')
     def compute_name(self):
-        self.name = str(self.cash_allowance_id.name) + \
-            ' (' + str(self.contract_id.name) + ')'
+        for rec in self:
+            rec.name = str(rec.cash_allowance_id.name) + \
+                ' (' + str(rec.contract_id.name) + ')'
 
 
     def _default_company_id(self):
