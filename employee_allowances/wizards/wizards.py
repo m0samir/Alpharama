@@ -86,6 +86,6 @@ class HrBonusAndCommission(models.TransientModel):
                 'cash_allowance_id': self.cash_allowance_id.id,
                 'computation': 'fixed',
                 'fixed': rec.allowance_amount,
-                'employee_id': rec.employee_id.id
+#                 'employee_id': rec.employee_id.id
             }
             self.env['ke.cash_allowances'].sudo().create(vals)
