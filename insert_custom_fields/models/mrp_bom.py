@@ -15,4 +15,5 @@ class MrpBomLine(models.Model):
     work_order_operation = fields.Text(string='Operation', store=True)
     work_order_time = fields.Text(string='Time', store=True)
     work_order_comments = fields.Text(string='Comments', store=True)
+    no_of_pieces = fields.Float(String = 'Number of Pieces', store=True )
     
