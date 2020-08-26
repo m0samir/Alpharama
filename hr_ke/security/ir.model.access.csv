@@ -32,3 +32,7 @@ access_ke_advance,access_ke_advance,model_ke_advance,,1,1,1,0
 access_ke_advance_approver,access_ke_advance_approver,model_ke_advance,hr_ke.group_sal_adv,1,1,1,1
 
 access_hr_ke,access_hr_ke,model_hr_ke,,1,1,1,1
+
+access_ke_extra_salary,extra.salary.user,model_extra_salary,,1,1,1,1
+
+access_ke_emp_list,emp.list.user,model_emp_list,,1,1,1,1
