@@ -15,9 +15,9 @@
 				<field name="arch" type="xml">
 						<form>
 								<header>
-										<button string="Send for Approval" name="overtime_approval" type="object" groups="hr_ke.group_overtime_manager" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-										<button string="Approve" name="overtime_approved" type="object" class="oe_highlight" groups="hr_ke.group_overtime_director" attrs="{'invisible': [('state', '!=', 'approval')]}"/>
-										<button string="Disapprove" name="overtime_disapproved"  type="object" groups="hr_ke.group_overtime_director" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'approval')]}"/>
+										<button string="Send for Approval" name="overtime_approval" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+										<button string="Approve" name="overtime_approved" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'approval')]}"/>
+										<button string="Disapprove" name="overtime_disapproved"  type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'approval')]}"/>
 										<button string="Reset to Draft" name="overtime_reset" type="object" states="approval" class="oe_highlight"/>
 										<field name="state" widget="statusbar" statusbar_visible="draft,approval,approved,disapproved" statusbar_colors="{&quot;draft&quot;:&quot;blue&quot;,&quot;approval&quot;:&quot;blue&quot;,&quot;approved&quot;:&quot;green&quot;}"/>
 								</header>
