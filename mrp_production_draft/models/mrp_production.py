@@ -84,5 +84,8 @@ class MrpProduction(models.Model):
             production.state = 'confirmed'
             if not self.procurement_group_id:
                 production.procurement_group_id = self.env["procurement.group"].create({'name': production.name}).id
-            production._generate_moves()
+            production._generate_finished_moves()
+            production.move_raw_ids._adjust_procure_method()
+            (production.move_raw_ids | production.move_finished_ids)._action_confirm()
+        return True
 
