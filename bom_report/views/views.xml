@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- mrp.production inherit form view -->
+        <record id="mrp_production_form_view_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.inherit.view.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button string="Percentage Yields" name="%(action_print_bom_lot_report)d" type="action" class="oe_highlight" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_template_form_inherited" model="ir.ui.view">
+            <field name="name">Configure for wet products</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+
+                <field name="sale_ok" position="before">
+                    <group>
+                        <field name="isa_hide" widget="boolean_button" />
+                    </group>
+                </field>
+
+            </field>
+
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="bom_lot_report">
+            <t t-call="web.html_container">
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="text-center" style="margin-bottom: 30px;">
+                                <h3>Percentage Yields</h3>
+                            </div>
+                            <div>
+                                <h3>
+                                    <strong>
+                                        WB-HIDES SELECTION
+</strong>
+                                    <span>
+                                        <t t-esc="o.date_planned_start.strftime('%Y-%m-%d')" />
+                                    </span>
+                                    <strong>-</strong>
+                                    <span>
+                                        <t t-esc="o.date_planned_finished.strftime('%Y-%m-%d')" />
+                                    </span>
+                                </h3>
+                            </div>
+
+                            <div class="row d-flex p-2">
+                                <h4>MO:</h4>
+                                <h4>
+                                    <t t-esc="o.name" />
+                                </h4>
+                            </div>
+
+                            <div class="container" style="margin-top: 20px;">
+                                <t t-call="bom_report.bom_lot_input_report" />
+                            </div>
+
+                            <div class="container" style="margin-top: 40px;">
+                                <t t-call="bom_report.bom_lot_output_report" />
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

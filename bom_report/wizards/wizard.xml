@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="action_print_bom_lot_report_form" model="ir.ui.view">
+            <field name="name">Bom Lot Report Form</field>
+            <field name="model">bom.lot.report</field>
+            <field name="arch" type="xml">
+                <form string="Bom Lot Report Form">
+                    <group>
+                        <span colspan="4" nolabel="1">Select a timeframe to get all Manufacturing orders between it.</span>
+                    </group>
+                    <group>
+                        <field name="date_start" />
+                        <field name="date_end" />
+                    </group>
+
+                    <footer>
+                        <button name="percentage_yield_report" string="Print" type="object" class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_print_bom_lot_report" model="ir.actions.act_window">
+            <field name="name">Bom Lot Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bom.lot.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="action_print_bom_lot_report_form" />
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

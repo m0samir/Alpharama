@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+    For Module Support : devintelle@gmail.com  or Skype : devintelle 
+ -->
+<odoo>
+      <record id="employee_inherited_view" model="ir.ui.view">
+	     <field name="name">employee.inherited.view</field>
+	     <field name="model">hr.employee</field>
+	     <field name="inherit_id" ref="hr.view_employee_form"/>
+	     <field name="arch" type="xml">
+		     <xpath expr="//field[@name='birthday']" position="after">
+                <field name="employee_age" readonly="1" force_save="1"/>
+		     </xpath>
+	    </field>
+     </record>
+</odoo>
+
