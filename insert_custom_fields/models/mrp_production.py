@@ -14,5 +14,6 @@ class StockMove(models.Model):
     pwork_order_time = fields.Text(related = 'bom_line_id.work_order_time', string='Time')
     pwork_order_comments = fields.Text(related = 'bom_line_id.work_order_comments', string='Comments')
     pwork_order_qconsumed = fields.Text(string='Actual Quantity Consumed')
+    work_order_pieces = fields.Float(related = 'bom_line_id.no_of_pieces', string='Pieces')
 	
     
