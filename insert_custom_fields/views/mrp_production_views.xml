@@ -24,7 +24,6 @@
 						  <field name="pwork_order_operation"/>
 						  <field name="pwork_order_time"/>
 						  <field name="pwork_order_comments"/>
-						  <field name="work_order_pieces"/>
 						  <field name="is_done" invisible="1"/>
 						  <field name="bom_line_id" invisible="1"/>
 						  <field name="sequence" invisible="1"/>

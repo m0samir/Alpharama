@@ -1,6 +1,5 @@
 from collections import Counter
 from collections import defaultdict
-from itertools import groupby
 
 
 from odoo import api, fields, models, _
@@ -14,43 +13,8 @@ class StockMove(models.Model):
     no_of_pieces = fields.Float(string="Pieces", store=True)
     mno_of_pieces = fields.Float(string="Pieces", store=True)
 
-    def _assign_picking(self):
-        """ Try to assign the moves to an existing picking that has not been
-        reserved yet and has the same procurement group, locations and picking
-        type (moves should already have them identical). Otherwise, create a new
-        picking to assign them to. """
-        Picking = self.env['stock.picking']
-        grouped_moves = groupby(sorted(self, key=lambda m: [f.id for f in m._key_assign_picking()]), key=lambda m: [m._key_assign_picking()])
-        for group, moves in grouped_moves:
-            moves = self.env['stock.move'].concat(*list(moves))
-            new_picking = False
-            # Could pass the arguments contained in group but they are the same
-            # for each move that why moves[0] is acceptable
-            picking = moves[0]._search_picking_for_assignation()
-            if picking:
-                if any(picking.partner_id.id != m.partner_id.id or
-                        picking.origin != m.origin for m in moves):
-                    # If a picking is found, we'll append `move` to its move list and thus its
-                    # `partner_id` and `ref` field will refer to multiple records. In this
-                    # case, we chose to  wipe them.
-                    picking.write({
-                        'partner_id': False,
-                        'origin': False,
-                    })
-            else:
-                new_picking = True
-                picking = Picking.create(moves._get_new_picking_values())
-                
-            moves.write({'picking_id': picking.id})
-            moves._assign_picking_post_process(new=new_picking)
-            
-            for rec in moves:
-                mo_name = self.env['mrp.production'].search([('name', '=', rec.picking_id.origin)], limit=1)
-                for record in mo_name.move_raw_ids:
-                    if rec.product_id.id == record.product_id.id:
-                        rec.write({'mno_of_pieces': record.work_order_pieces})                        
-        return True
-    
+
+
     def _action_done(self, cancel_backorder=False):
         self.filtered(lambda move: move.state == 'draft')._action_confirm()  # MRP allows scrapping draft moves
         moves = self.exists().filtered(lambda x: x.state not in ('done', 'cancel'))
@@ -95,14 +59,9 @@ class StockMove(models.Model):
         #import pdb;pdb.set_trace()
         moves_todo.write({'state': 'done', 'date': fields.Datetime.now()})
         for line in moves_todo:
-            mo_id = self.env['mrp.production'].search([('name', '=', line.origin)], limit=1)
-            if line.state=='done' and mo_id:
-                intital_product = line.product_id.pt_no_of_pieces
-                line.product_id.pt_no_of_pieces = intital_product - line.mno_of_pieces
-                
-            elif line.state=='done' and not mo_id:
-                intital_product = line.product_id.pt_no_of_pieces
-                line.product_id.pt_no_of_pieces = intital_product + line.mno_of_pieces
+            if line.state=='done':
+                intital_product=line.product_id.pt_no_of_pieces
+                line.product_id.pt_no_of_pieces=line.mno_of_pieces+intital_product
 
         move_dests_per_company = defaultdict(lambda: self.env['stock.move'])
         for move_dest in moves_todo.move_dest_ids:
@@ -118,3 +77,6 @@ class StockMove(models.Model):
         if picking and not cancel_backorder:
             picking._create_backorder()
         return moves_todo
+
+
+ 
