@@ -18,7 +18,6 @@ class FineAllocation(models.TransientModel):
     rule_id = fields.Many2one(
         related='deduction_id.rule_id', string="Salary Rule")
 
-    # @api.multi
     def action_allocate_fine(self):
         record = self.env['ke.batch.deduction'].browse(
             self._context.get('active_ids', []))
@@ -44,7 +43,6 @@ class HrOvertime(models.TransientModel):
     contract_id = fields.Many2one(
         'hr.contract', string='Contract', related='employee_ids.contract_id')
 
-    # @api.multi
     def action_allocate_overtime(self):
         # get the id of the current open record
         overtime_record = self.env['ke.overtime'].browse(
@@ -78,14 +76,18 @@ class HrBonusAndCommission(models.TransientModel):
 
     allowance_amount = fields.Float(string='Amount', default=0.0)
 
-    # @api.multi
     def action_allocate_bonus(self):
         for rec in self.contract_ids:
+            # contract = self.env['hr.contract'].search([('id', '=', rec.id)])
+            # lines = [(0, 0, {'cash_allowance_id': self.cash_allowance_id.id,
+            #                  'computation': 'fixed',
+            #                  'fixed': rec.allowance_amount, })]
+            # contract.cash_allowances = lines
             vals = {
                 'contract_id': rec.id,
+                'company_id': rec.company_id.id,
                 'cash_allowance_id': self.cash_allowance_id.id,
                 'computation': 'fixed',
                 'fixed': rec.allowance_amount,
-#                 'employee_id': rec.employee_id.id
             }
             self.env['ke.cash_allowances'].sudo().create(vals)

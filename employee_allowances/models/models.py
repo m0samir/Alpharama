@@ -1,6 +1,7 @@
 from odoo import api, fields, models, _
 from datetime import datetime, date, timedelta
 from odoo.exceptions import ValidationError
+import json
 
 
 class HrEmployee(models.Model):
@@ -48,6 +49,34 @@ class HrContract(models.Model):
                     rec.update({'state': 'pending'})
 
 
+class HrPayslip(models.Model):
+    _inherit = 'hr.payslip'
+
+    def action_payslip_done(self):
+        # execute original code
+        res = super().action_payslip_done()
+
+        deductions = self.env['ke.deductions'].search(
+            [('employee_id', '=', self.employee_id.id)])
+
+        allowances = self.env['ke.cash_allowances'].search(
+            [('contract_id', '=', self.contract_id.id)])
+
+        for rec in deductions:
+            deduction = self.env['ke.deductions.type'].search(
+                [('id', '=', rec.deduction_id.id)]).mapped('recurring_deduction')
+            if deduction[0] == False:
+                rec.unlink()
+
+        for rec in allowances:
+            allowance = self.env['ke.cash.allowances.type'].search(
+                [('id', '=', rec.cash_allowance_id.id)]).mapped('recurring_allowance')
+            if allowance[0] == False:
+                rec.unlink()
+
+        return self.write({'state': 'done'})
+
+
 class KeCashAllowanceType(models.Model):
     _inherit = 'ke.cash.allowances.type'
 
@@ -55,11 +84,17 @@ class KeCashAllowanceType(models.Model):
         string='Recurring Allowance', help='This type of allowance is recurrent every month.')
 
 
+class KeDeductionType(models.Model):
+    _inherit = 'ke.deductions.type'
+
+    recurring_deduction = fields.Boolean(
+        string='Recurring Deduction', help='This type of deduction is recurrent every month.')
+
+
 class KeBatchDeduction(models.Model):
     _name = 'ke.batch.deduction'
     _description = 'Batch Deduction Allocation'
 
-    # @api.multi
     def action_confirm_deductions(self):
         if len(self.deduction_ids) == 0:
             raise ValidationError(

@@ -19,6 +19,24 @@
       </field>
     </record>
 
+    <!-- ADD RECURRING FIELDS FOR AFTER TAX DEDUCTIONS -->
+    <!-- ke.cash.allowance.type inherit form view -->
+    <record id="ke_cash_deduction_type_inherit" model="ir.ui.view">
+      <field name="name">ke.cash.deductions.type.inherit.view.form</field>
+      <field name="model">ke.deductions.type</field>
+      <field name="inherit_id" ref="hr_ke.ke_deductions_type_form" />
+      <field name="arch" type="xml">
+
+        <xpath expr="//group[@name='deduction_type']" position="after">
+          <group name="recurring">
+            <field name="recurring_deduction" />
+          </group>
+
+        </xpath>
+
+      </field>
+    </record>
+
 
     <record id="action_batch_deduction" model="ir.actions.act_window">
       <field name="type">ir.actions.act_window</field>
