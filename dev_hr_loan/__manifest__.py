@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
 #
-#    For Module Support : devintelle@gmail.com  or Skype : devintelle 
+#    For Module Support : devintelle@gmail.com  or Skype : devintelle
 #
 ##############################################################################
 
@@ -15,21 +15,21 @@
     'category': 'Generic Modules/Human Resources',
     'description': """
         odod Apps will add Hr Employee Loan functioality for employee
-        
+
 Employee loan management
 Odoo employee loan management
 HR employee loan
 Odoo HR employee loan
 HR loan for employee
-HR loan approval functionality 
+HR loan approval functionality
 Loan Installment link with employee payslip
 Loan notification employee Inbox
 Loan Deduction in employee payslip
-Manage employee loan 
+Manage employee loan
 Manage employee loan odoo
 Manage HR loan for employee
 Manage HR loan for employee odoo
-Loan management 
+Loan management
 Odoo loan management
 Odoo loan management system
 Odoo loan management app
@@ -43,7 +43,7 @@ Open HRMS Loan Management
 Loan accounting
 Odoo loan accounting
 Employee can create loan request.
-Manage Employee Loan and Integrated with Payroll        
+Manage Employee Loan and Integrated with Payroll
     """,
     'summary':'odoo app will add Hr Employee Loan functioality for employee',
     'depends': ['hr_payroll','hr_payroll_account'],
@@ -68,22 +68,22 @@ Manage Employee Loan and Integrated with Payroll
         'views/hr_loan_dashbord.xml',
         'views/loan_document.xml',
         'views/loan_report_views.xml',
-        
+
     ],
     'demo': [],
     'test': [],
     'css': [],
     'qweb': [],
     'js': [],
-    'images': ['images/main_screenshot.png'],
+    # 'images': ['images/main_screenshot.png'],
     'installable': True,
     'application': True,
     'auto_install': False,
-    
+
     # author and support Details =============#
     'author': 'DevIntelle Consulting Service Pvt.Ltd',
-    'website': 'http://www.devintellecs.com',    
-    'maintainer': 'DevIntelle Consulting Service Pvt.Ltd', 
+    'website': 'http://www.devintellecs.com',
+    'maintainer': 'DevIntelle Consulting Service Pvt.Ltd',
     'support': 'devintelle@gmail.com',
     'price':59.0,
     'currency':'EUR',

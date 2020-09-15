@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
 #
-#    For Module Support : devintelle@gmail.com  or Skype : devintelle 
+#    For Module Support : devintelle@gmail.com  or Skype : devintelle
 #
 ##############################################################################
 
@@ -13,12 +13,12 @@ from odoo import models, fields, api, _
 
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
-    
+
     installment_ids = fields.Many2many('installment.line',string='Installment Lines')
     installment_amount = fields.Float('Installment Amount',compute='get_installment_amount')
     installment_int = fields.Float('Installment Amount',compute='get_installment_amount')
 
-    
+    # @api.multi
     def compute_sheet(self):
         for data in self:
             installment_ids = self.env['installment.line'].search(
@@ -27,8 +27,8 @@ class hr_payslip(models.Model):
             if installment_ids:
                 data.installment_ids = [(6, 0, installment_ids.ids)]
         return super(hr_payslip,self).compute_sheet()
-    
-        
+
+
 
     @api.depends('installment_ids')
     def get_installment_amount(self):
@@ -40,7 +40,7 @@ class hr_payslip(models.Model):
                     if not installment.is_skip:
                         amount += installment.installment_amt
                     int_amount += installment.ins_interest
-                    
+
             payslip.installment_amount = amount
             payslip.installment_int = int_amount
 
@@ -62,6 +62,7 @@ class hr_payslip(models.Model):
             if installment_ids:
                 self.installment_ids = [(6, 0, installment_ids.ids)]
 
+    # @api.multi
     def action_payslip_done(self):
         res = super(hr_payslip, self).action_payslip_done()
         if self.installment_ids:

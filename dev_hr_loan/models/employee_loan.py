@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
 #
-#    For Module Support : devintelle@gmail.com  or Skype : devintelle 
+#    For Module Support : devintelle@gmail.com  or Skype : devintelle
 #
 ##############################################################################
 
@@ -28,7 +28,7 @@ class employee_loan(models.Model):
                 ('close', 'Close'),
                 ('reject','Reject'),
                 ('cancel','Cancel')]
-                
+
     @api.model
     def _get_employee(self):
         employee_id = self.env['hr.employee'].search([('user_id','=',self.env.user.id)],limit=1)
@@ -78,14 +78,14 @@ class employee_loan(models.Model):
     notes = fields.Text('Reason', required="1")
     is_close = fields.Boolean('IS close',compute='is_ready_to_close')
     move_id = fields.Many2one('account.move',string='Journal Entry')
-    
+
     loan_document_line_ids = fields.One2many('dev.loan.document','loan_id')
     installment_count = fields.Integer(compute='get_interest_count')
     is_dm = fields.Boolean('Department Manager', compute='is_department_manager')
     reject_reason = fields.Text('Reject Reason', copy=False)
-    
-    
-    
+
+
+    # @api.multi
     def send_loan_detail(self):
         if self.employee_id and self.employee_id.work_email:
             template_id = self.env['ir.model.data'].get_object_reference('dev_hr_loan',
@@ -94,8 +94,8 @@ class employee_loan(models.Model):
             template_id = self.env['mail.template'].browse(template_id[1])
             template_id.send_mail(self.ids[0], True)
         return True
-        
-        
+
+
     @api.depends('employee_id','manager_id','state')
     def is_department_manager(self):
         for loan in self:
@@ -104,15 +104,15 @@ class employee_loan(models.Model):
                     loan.is_dm = True
                 else:
                     loan.is_dm = False
-    
-    
+
+
     @api.onchange('term','interest_rate','interest_type')
     def onchange_term_interest_type(self):
         if self.loan_type_id:
-            self.term = self.loan_type_id.loan_term
+#             self.term = self.loan_type_id.loan_term
             self.interest_rate = self.loan_type_id.interest_rate
             self.interest_type = self.loan_type_id.interest_type
-    
+
     @api.depends('remaing_amount')
     def is_ready_to_close(self):
         for loan in self:
@@ -129,13 +129,13 @@ class employee_loan(models.Model):
                         amt += line.ins_interest
                     else:
                         amt += line.total_installment
-                    
+
             loan.paid_amount = amt
 
 
 
 
-    
+    # @api.multi
     def compute_installment(self):
         vals=[]
         for i in range(0,self.term):
@@ -175,7 +175,7 @@ class employee_loan(models.Model):
         for loan in self:
             if loan.installment_lines:
                 loan.installment_count = len(loan.installment_lines)
-    
+
     @api.depends('installment_lines','paid_amount')
     def get_extra_interest(self):
         for loan in self:
@@ -243,15 +243,15 @@ class employee_loan(models.Model):
         year = now.year
         s_date = str(year)+'-01-01'
         e_date = str(year)+'-12-01'
-        
+
         loan_ids = self.search([('employee_id','=',self.employee_id.id),('date','<=',e_date),('date','>=',s_date)])
         loan = len(loan_ids)
         if loan > self.employee_id.loan_request:
             raise ValidationError("You can create maximum %s loan" % self.employee_id.loan_request)
-            
 
-        
-    
+
+
+
 
     @api.constrains('loan_amount','term','loan_type_id','employee_id.loan_request')
     def _check_loan_amount_term(self):
@@ -271,7 +271,7 @@ class employee_loan(models.Model):
     @api.onchange('loan_type_id')
     def _onchange_loan_type(self):
         if self.loan_type_id:
-            self.term = self.loan_type_id.loan_term
+#             self.term = self.loan_type_id.loan_term
             self.is_apply_interest = self.loan_type_id.is_apply_interest
             if self.is_apply_interest:
                 self.interest_rate = self.loan_type_id.interest_rate
@@ -280,7 +280,7 @@ class employee_loan(models.Model):
 
 
 
-    
+
     @api.onchange('employee_id')
     def onchange_employee_id(self):
         if self.employee_id:
@@ -292,7 +292,7 @@ class employee_loan(models.Model):
 
             self.job_id = self.employee_id.job_id and self.employee_id.job_id.id or False,
 
-    
+    # @api.multi
     def action_send_request(self):
         if not self.manager_id:
             raise ValidationError(_('Please Select Department manager'))
@@ -308,7 +308,7 @@ class employee_loan(models.Model):
         return True
 
 
-    
+    # @api.multi
     def get_hr_manager_email(self):
         group_id = self.env['ir.model.data'].get_object_reference('hr', 'group_hr_manager')[1]
         group_ids = self.env['res.groups'].browse(group_id)
@@ -322,7 +322,7 @@ class employee_loan(models.Model):
                     email= emp.work_email
         return email
 
-    
+    # @api.multi
     def dep_manager_approval_loan(self):
         self.state = 'dep_approval'
         email = self.get_hr_manager_email()
@@ -335,7 +335,7 @@ class employee_loan(models.Model):
         return True
 
 
-  
+    # @api.multi
     def dep_manager_reject_loan(self):
         self.state = 'reject'
         if self.employee_id.work_email:
@@ -347,8 +347,8 @@ class employee_loan(models.Model):
             template_id.send_mail(self.ids[0], True)
         return True
 
-    
-    
+
+    # @api.multi
     def hr_manager_approval_loan(self):
         self.state = 'hr_approval'
         employee_id = self.env['hr.employee'].search([('user_id','=',self.env.user.id)],limit=1)
@@ -361,8 +361,8 @@ class employee_loan(models.Model):
             template_id.write({'email_to': self.employee_id.work_email})
             template_id.send_mail(self.ids[0], True)
         return True
-    
-    
+
+    # @api.multi
     def hr_manager_reject_loan(self):
         self.state = 'reject'
         employee_id = self.env['hr.employee'].search([('user_id', '=', self.env.user.id)], limit=1)
@@ -375,8 +375,8 @@ class employee_loan(models.Model):
             template_id.write({'email_to': self.employee_id.work_email})
             template_id.send_mail(self.ids[0], True)
         return True
-    
-    
+
+    # @api.multi
     def action_close_loan(self):
         self.state = 'close'
         if self.employee_id.work_email and self.hr_manager_id:
@@ -389,22 +389,22 @@ class employee_loan(models.Model):
         return True
 
 
-    
+    # @api.multi
     def cancel_loan(self):
         self.state = 'cancel'
 
-   
+    # @api.multi
     def set_to_draft(self):
         self.state = 'draft'
         self.hr_manager_id = False
 
 
 
-    
+    # @api.multi
     def paid_loan(self):
         if not self.employee_id.address_home_id:
             raise ValidationError(_('Employee Private Address is not selected in Employee Form !!!'))
-            
+
         self.state = 'paid'
         vals={
             'date':self.date,
@@ -420,7 +420,7 @@ class employee_loan(models.Model):
                         'name':self.name,
                         'credit':self.loan_amount or 0.0,
                     }))
-                    
+
         if self.interest_amount:
             lst.append((0,0,{
                             'account_id':self.loan_type_id and self.loan_type_id.interest_account.id,
@@ -428,15 +428,15 @@ class employee_loan(models.Model):
                             'name':str(self.name)+' - '+'Interest',
                             'credit':self.interest_amount or 0.0,
                         }))
-                    
+
         credit_account=False
         if self.employee_id.address_home_id and self.employee_id.address_home_id.property_account_payable_id:
             credit_account = self.employee_id.address_home_id.property_account_payable_id.id or False
-                    
+
         debit_amount = self.loan_amount
         if self.interest_amount:
             debit_amount += self.interest_amount
-            
+
         lst.append((0,0,{
                         'account_id':credit_account or False,
                         'partner_id':self.employee_id.address_home_id and self.employee_id.address_home_id.id or False,
@@ -446,21 +446,22 @@ class employee_loan(models.Model):
         acc_move_id.line_ids = lst
         if acc_move_id:
             self.move_id = acc_move_id.id
-                    
-                     
 
-    
+
+
+    # @api.multi
     def view_journal_entry(self):
         if self.move_id:
             return {
                 'view_mode': 'form',
                 'res_id': self.move_id.id,
                 'res_model': 'account.move',
+                'binding_view_types': 'form',
                 'type': 'ir.actions.act_window',
             }
-            
-            
-    
+
+
+    # @api.multi
     def action_done_loan(self):
         self.state = 'done'
 
@@ -472,22 +473,22 @@ class employee_loan(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code(
                 'employee.loan') or '/'
         return super(employee_loan, self).create(vals)
-        
-    
+
+    # @api.multi
     def copy(self, default=None):
         if default is None:
             default = {}
         default['name'] = '/'
         return super(employee_loan, self).copy(default=default)
-    
-    
+
+    # @api.multi
     def unlink(self):
         for loan in self:
             if loan.state != 'draft':
                 raise ValidationError(_('Loan delete in draft state only !!!'))
         return super(employee_loan,self).unlink()
-        
-    
+
+    # @api.multi
     def action_view_loan_installment(self):
         action = self.env.ref('dev_hr_loan.action_installment_line').read()[0]
 
