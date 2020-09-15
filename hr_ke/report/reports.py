@@ -609,12 +609,14 @@ class PayrollReports(models.Model):
                     'HOUSE ALLOWANCE',
                     'LEAVE',
                     'BONUS',
+                    'OVERTIME ALLOWANCES',
                     'OTHER ALLOWANCES',
                     'GROSS PAY',
                     'BENEFITS',
                     'TAXABLE PAY',
                     'ALLOWED DEDUCTIONS',
                     'SALARY ADVANCE',
+                    'ABSENT AMOUNT',
                     'SACCO',
                     'PLEDGE',
                     'LOAN',
@@ -627,7 +629,7 @@ class PayrollReports(models.Model):
                     'NET PAY']
                 # DATA HEADERS
                 for k, x in enumerate(
-                        string.ascii_uppercase[0:23]):  # 'ABCDEFGHIJKLMNOPQRSTUVW'
+                        string.ascii_uppercase[0:25]):  # 'ABCDEFGHIJKLMNOPQRSTUVWXY'
                     ws[x + str(fr - 1)] = cols[k]
 
                 for key, slip in enumerate(rec.slip_ids):
@@ -691,58 +693,68 @@ class PayrollReports(models.Model):
                          ('slip_id', '=', slip.id)],
                         limit=1).total or 0.0  # Bonus
                     ws['H' + str(fr + key)] = slip.line_ids.search([(
+                        'salary_rule_id', '=',
+                        rec.env.ref('hr_ke.ke_rule13').id),
+                        ('slip_id', '=', slip.id)],
+                        limit=1).total or 0.0  # Overtime
+                    ws['I' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
                            rec.env.ref('hr_ke.ke_rule19').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total or 0.0  # Other Allowances
-                    ws['I' + str(fr + key)] = cross_pay
-                    ws['J' + str(fr + key)] = cross_taxable - cross_pay
-                    ws['K' + str(fr + key)] = cross_taxable
-                    ws['L' + str(fr + key)] = slip.line_ids.search([(
+                    ws['J' + str(fr + key)] = cross_pay
+                    ws['K' + str(fr + key)] = cross_taxable - cross_pay
+                    ws['L' + str(fr + key)] = cross_taxable
+                    ws['M' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
                            rec.env.ref('hr_ke.ke_rule80').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total  # Total Allowed Deductions
-                    ws['M' + str(fr + key)] = slip.line_ids.search([(
+                    ws['N' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
                            rec.env.ref('hr_ke.ke_rule108').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total  # Salary Advance
-                    ws['N' + str(fr + key)] = slip.line_ids.search([(
+                    ws['O' + str(fr + key)] = slip.line_ids.search([(
+                          'salary_rule_id', '=',
+                           rec.env.ref('hr_ke.ke_rule111').id),
+                         ('slip_id', '=', slip.id)],
+                        limit=1).total  # Absent Amount     
+                    ws['P' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
                            rec.env.ref('hr_ke.ke_rule109').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total  # SACCO
-                    ws['O' + str(fr + key)] = slip.line_ids.search([(
+                    ws['Q' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
-                           rec.env.ref('__export__.hr_salary_rule_137_4aabca80').id),
+                           rec.env.ref('hr_ke.ke_rule110').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total  # Pledge
-                    ws['P' + str(fr + key)] = slip.line_ids.search([(
+                    ws['R' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
-                           rec.env.ref('__export__.hr_salary_rule_139_2ee23116').id),
+                           rec.env.ref('hr_ke.ke_rule112').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total  # Loan
-                    ws['Q' + str(fr + key)] = slip.line_ids.search([(
+                    ws['S' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
                            rec.env.ref('hr_ke.ke_rule85').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total  # Total Net Taxable Pay
-                    ws['R' + str(fr + key)] = slip.line_ids.search([(
+                    ws['T' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=', rec.env.ref(
                               'hr_ke.ke_rule105').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total  # Total Net PAYE
-                    ws['S' + str(fr + key)] = slip.line_ids.search([(
+                    ws['U' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=',
                            rec.env.ref('hr_ke.ke_rule55').id),
                          ('slip_id', '=', slip.id)],
                         limit=1).total or 0.0  # Total NSSF - Member
-                    ws['T' + str(fr + key)] = nhif
-                    ws['U' + str(fr + key)] = helb
+                    ws['V' + str(fr + key)] = nhif
+                    ws['W' + str(fr + key)] = helb
                     # other deductions apart from nhif and helb
-                    ws['V' + str(fr + key)] = deds - helb - nhif
-                    ws['W' + str(fr + key)] = slip.line_ids.search([(
+                    ws['X' + str(fr + key)] = deds - helb - nhif
+                    ws['Y' + str(fr + key)] = slip.line_ids.search([(
                           'salary_rule_id', '=', rec.env.ref(
                               'hr_ke.ke_rule120').id),
                          ('slip_id', '=', slip.id)],
