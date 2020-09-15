@@ -10,7 +10,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
         <field name="sequence" eval="190"/>
         <field name="code">LOANINS</field>
         <field name="category_id" ref="hr_payroll.DED"/>
-        <field name="struct_id">4</field>
+        <field name="struct_id">1</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = (payslip.installment_amount*-1 or 0)</field>
@@ -21,7 +21,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
         <field name="sequence" eval="191"/>
         <field name="code">LOANINT</field>
         <field name="category_id" ref="hr_payroll.DED"/>
-        <field name="struct_id">4</field>
+        <field name="struct_id">1</field>
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = (payslip.installment_int*-1 or 0)</field>
