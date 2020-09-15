@@ -765,7 +765,7 @@ class PayrollReports(models.Model):
                 # Totals
                 t = fr + key + 1  # last row for Totals
                 ws['B' + str(t)] = 'TOTALS'
-                for x in string.ascii_uppercase[2:15]:  # 'CDEFGHIJKLMNO'
+                for x in string.ascii_uppercase[2:26]:  # 'CDEFGHIJKLMNOPQRSTUVWXYZ'
                     # Sum using excel 'SUM' formula
                     ws[x + str(t)] = '=SUM(' + x + str(fr) + \
                         ':' + x + str(t - 1) + ')'
