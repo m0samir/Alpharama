@@ -14,8 +14,12 @@ class HrEmployee(models.Model):
         related='deduction_id.rule_id', string="Salary Rule")
     overtime_hours = fields.Float(string='Overtime Hours')
     contract_id = fields.Many2one('hr.contract', string='Contract')
-    
-    bank_name_id = fields.Many2one(related='bank_account_id.bank_id',string="Bank Name")
+
+    bank_name = fields.Char(string='Bank')
+    bank_branch = fields.Char(string='Bank Branch')
+    employee_bank_account = fields.Char(string='Employee\'s Account Number')
+    branch_code = fields.Char(string='Bank Branch Code')
+
 
 class HrContract(models.Model):
     _inherit = 'hr.contract'

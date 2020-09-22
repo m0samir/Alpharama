@@ -1,25 +1,32 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
   <data noupdate="0">
-    <!-- SHOW BANK ACCOUNT AND BANK NAME IN EMPLOYEE FORM -->
+    <!-- EXTEND HR EMPLOYEE FORM VIEW -->
     <!-- hr.employee inherit form view -->
-    <record id="hr_ke_employee_form_inehrit" model="ir.ui.view">
-      <field name="name">hr_ke.inherit.view.form</field>
+
+    <record id="hr_employee_bank_details_form_inherit" model="ir.ui.view">
+      <field name="name">hr.employee.inherit.view.form</field>
       <field name="model">hr.employee</field>
-      <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2" />
+      <field name="inherit_id" ref="hr.view_employee_form" />
       <field name="arch" type="xml">
 
-        <xpath expr="//field[@name='bank_account_id']" position="replace">
-            <field name="bank_account_id" context="{'display_partner':True}"/>
+        <xpath expr="//page[@name='personal_information']/group/group" position="after">
+          <group string="Bank Details">
+            <field name="bank_name" />
+            <field name="bank_branch" />
+            <field name="employee_bank_account" />
+            <field name="branch_code" />
+          </group>
         </xpath>
-        <xpath expr="//field[@name='bank_account_id']" position="after">
-            <field name="bank_name_id"/>
-        </xpath>       
 
       </field>
     </record>
-      
-      
+
+    <!-- SHOW BANK ACCOUNT AND BANK NAME IN EMPLOYEE FORM -->
+    <!-- hr.employee inherit form view -->
+
+    <!-- <record id="hr_ke_employee_form_inehrit" model="ir.ui.view"> <field name="name">hr_ke.inherit.view.form</field> <field name="model">hr.employee</field> <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2" /> <field name="arch" type="xml"> <xpath expr="//field[@name='bank_account_id']" position="replace"> <field name="bank_account_id" context="{'display_partner':True}" /> </xpath> <xpath expr="//field[@name='bank_account_id']" position="after"> <field name="bank_name_id" /> </xpath> </field> </record> -->
+
     <!-- ADD RECURRING FIELDS FOR CASH ALLOWANCES -->
     <!-- ke.cash.allowance.type inherit form view -->
     <record id="ke_cash_allownce_type_inherit" model="ir.ui.view">
