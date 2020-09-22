@@ -25,7 +25,7 @@
     <!-- SHOW BANK ACCOUNT AND BANK NAME IN EMPLOYEE FORM -->
     <!-- hr.employee inherit form view -->
 
-    <!-- <record id="hr_ke_employee_form_inehrit" model="ir.ui.view"> <field name="name">hr_ke.inherit.view.form</field> <field name="model">hr.employee</field> <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2" /> <field name="arch" type="xml"> <xpath expr="//field[@name='bank_account_id']" position="replace"> <field name="bank_account_id" context="{'display_partner':True}" /> </xpath> <xpath expr="//field[@name='bank_account_id']" position="after"> <field name="bank_name_id" /> </xpath> </field> </record> -->
+    <record id="hr_ke_employee_form_inehrit" model="ir.ui.view"> <field name="name">hr_ke.inherit.view.form</field> <field name="model">hr.employee</field> <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2" /> <field name="arch" type="xml"> <xpath expr="//field[@name='bank_account_id']" position="replace"> <field name="bank_account_id" context="{'display_partner':True}" /> </xpath> <xpath expr="//field[@name='bank_account_id']" position="after"> <field name="bank_name_id" /> </xpath> </field> </record>
 
     <!-- ADD RECURRING FIELDS FOR CASH ALLOWANCES -->
     <!-- ke.cash.allowance.type inherit form view -->
