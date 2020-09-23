@@ -1,0 +1,19 @@
+<odoo>
+   <data>
+
+	<record model="ir.module.category" id="payroll_segmentation_user">
+            <field name="name">Payroll Segmentation</field>
+            <field name="sequence">103</field>
+    </record>
+
+	<record id="group_payroll_junior" model="res.groups">
+		<field name="name">Junior</field>
+		<field name="category_id" ref="payroll_segmentation_user"/>
+	</record>
+	<record id="group_payroll_senior" model="res.groups">
+		<field name="name">Senior</field>
+		<field name="category_id" ref="payroll_segmentation_user"/>
+	</record>
+
+   </data>
+</odoo>
