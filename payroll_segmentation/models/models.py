@@ -32,7 +32,6 @@ class PieceRateLines(models.Model):
 class HrPayslipEmployees(models.TransientModel):
     _inherit = 'hr.payslip.employees'
 
-    @api.multi
     def compute_sheet(self):
         for rec in self.employee_ids:
             # pdb.set_trace()
