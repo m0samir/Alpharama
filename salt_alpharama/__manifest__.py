@@ -5,7 +5,7 @@
     'license': 'AGPL-3',
     'category': 'Stock',
     'website': '',
-	'depends': ['stock'],
+	'depends': ['stock_landed_costs'],
     'data': [
         'views/views.xml',
     ],
