@@ -9,6 +9,7 @@
             <field name="picking_ids" position="after">
                 <field name="internal_transfer" options="{'no_quick_create':True,'no_create_edit':True, 'no_open': True,
                                         'no_show':True, 'no_create':True,}"/>
+                <button string="Get Cost Lines" name="compute_internal_transfer" attrs="{'invisible':[('state','!=','draft')]}" type="object" class="oe_highlight"/>
             </field>
 
         </field>
