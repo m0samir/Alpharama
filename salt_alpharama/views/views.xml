@@ -6,13 +6,13 @@
         <field name="model">stock.landed.cost</field>
         <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
         <field name="arch" type="xml">
-			<xpath expr="//form[1]/sheet[1]/field[@name='valuation_adjustment_lines']/tree[1]/field[@name='additional_landed_cost']" position="after">
+<!-- 			<xpath expr="//form[1]/sheet[1]/field[@name='valuation_adjustment_lines']/tree[1]/field[@name='additional_landed_cost']" position="after">
 				<field name="landed_unit_rate"/>
                 <field name="product_total_cost" attrs="{}" readonly="1" string="Total Cost"/>
-			</xpath>
+			</xpath> -->
 
             <field name="picking_ids" position="after">
-                <field name="vendor_bill" widget="many2many_tags" options="{'no_quick_create':True,'no_create_edit':True, 'no_open': True,
+                <field name="internal_transfer" options="{'no_quick_create':True,'no_create_edit':True, 'no_open': True,
                                         'no_show':True, 'no_create':True,}"/>
             </field>
 
