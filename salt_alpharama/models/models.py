@@ -28,3 +28,26 @@ class LandedCost(models.Model):
                     'account_id': record.product_id.property_account_expense_id.id or       record.product_id.categ_id.property_account_expense_categ_id.id,
                     'cost_id': rec.id,
                     })  
+
+                    
+                    
+class ProductSupplierInfo(models.Model):
+    _inherit = 'product.supplierinfo'
+
+    price_percentage = fields.Float(string='Price Percentage')
+    
+    @api.onchange('price_percentage')
+    def update_price(self):
+        for rec in self:
+            rec.price = rec.product_tmpl_id.standard_price * (rec.price_percentage / 100)
+            
+            
+class StockLocation(models.Model):
+    _inherit = "stock.location"
+
+    valuation_in_account_id = fields.Many2one(
+        'account.account', 'Stock Valuation Account (Incoming)',
+        help="Used for real-time inventory valuation. When set on a virtual location (non internal type), "
+             "this account will be used to hold the value of products being moved from an internal location "
+             "into this location, instead of the generic Stock Output Account set on the product. "
+             "This has no effect for internal locations.")
