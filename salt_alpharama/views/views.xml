@@ -5,11 +5,40 @@
         <field name="model">stock.landed.cost</field>
         <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
         <field name="arch" type="xml">
-
+            
             <field name="picking_ids" position="after">
                 <field name="internal_transfer" options="{'no_quick_create':True,'no_create_edit':True, 'no_open': True,
                                         'no_show':True, 'no_create':True,}"/>
                 <button string="Get Cost Lines" name="compute_internal_transfer" attrs="{'invisible':[('state','!=','draft')]}" type="object" class="oe_highlight"/>
+            </field>
+
+        </field>
+    </record>
+    
+    <record id='product_supplierinfo_form_view_inherit' model='ir.ui.view'>
+        <field name="name">product.supplierinfo.form</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="product_tmpl_id" position="before">
+                <label for="price_percentage"/>
+                <div>
+                <field name="price_percentage"/>
+                </div>
+            </field>
+
+        </field>
+    </record>
+    
+    <record id='view_location_form_inherit' model='ir.ui.view'>
+        <field name="name">stock.location.form</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+
+            <field name="valuation_in_account_id" position="replace">
+                <field name="valuation_in_account_id" options="{'no_create': True}"/>
             </field>
 
         </field>
