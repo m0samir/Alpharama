@@ -20,11 +20,12 @@ class LandedCost(models.Model):
             if rec.internal_transfer:
                 rec.cost_lines.unlink()
                 for record in rec.internal_transfer.move_line_ids_without_package:
+                    vendor_price = self.env['product.supplierinfo'].search([('name', '=', rec.internal_transfer.partner_id.name), ('product_tmpl_id.name', '=', record.product_id.name)], limit=1)
                     self.env['stock.landed.cost.lines'].create({
                     'product_id': record.product_id.id,
                     'name': record.product_id.name or '',
                     'split_method': 'equal',
-                    'price_unit': record.product_id.standard_price * record.qty_done or 0.0,
+                    'price_unit': vendor_price.price * record.qty_done or 0.0 if vendor_price else record.product_id.standard_price * record.qty_done or 0.0,
                     'account_id': record.product_id.property_account_expense_id.id or       record.product_id.categ_id.property_account_expense_categ_id.id,
                     'cost_id': rec.id,
                     })  
