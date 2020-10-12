@@ -48,7 +48,72 @@ class StockLocation(models.Model):
 
     valuation_in_account_id = fields.Many2one(
         'account.account', 'Stock Valuation Account (Incoming)',
+        domain=[('deprecated', '=', False)],
         help="Used for real-time inventory valuation. When set on a virtual location (non internal type), "
              "this account will be used to hold the value of products being moved from an internal location "
              "into this location, instead of the generic Stock Output Account set on the product. "
              "This has no effect for internal locations.")
+
+    
+class StockMove(models.Model):
+    _inherit = "stock.move"
+    
+    def _account_entry_move(self, qty, description, svl_id, cost):
+        """ Accounting Valuation Entries """
+        self.ensure_one()
+        if self.product_id.type != 'product':
+            # no stock valuation for consumable products
+            return False
+        if self.restrict_partner_id:
+            # if the move isn't owned by the company, we don't make any valuation
+            return False
+
+        location_from = self.location_id
+        location_to = self.location_dest_id
+        company_from = self._is_out() and self.mapped('move_line_ids.location_id.company_id') or False
+        company_to = self._is_in() and self.mapped('move_line_ids.location_dest_id.company_id') or False
+
+        # Create Journal Entry for products arriving in the company; in case of routes making the link between several
+        # warehouse of the same company, the transit location belongs to this company, so we don't need to create accounting entries
+        if self._is_in():
+            journal_id, acc_src, acc_dest, acc_valuation = self._get_accounting_data_for_valuation()
+            if location_from and location_from.usage == 'customer':  # goods returned from customer
+                self.with_context(force_company=company_to.id)._create_account_move_line(acc_dest, acc_valuation, journal_id, qty, description, svl_id, cost)
+            else:
+                self.with_context(force_company=company_to.id)._create_account_move_line(acc_src, acc_valuation, journal_id, qty, description, svl_id, cost)
+
+        # Create Journal Entry for products leaving the company
+        if self._is_out():
+            
+            vendor_price = self.env['product.supplierinfo'].search([('name', '=', self.picking_id.partner_id.name), ('product_tmpl_id.name', '=', self.product_id.name)], limit=1)
+            
+            if vendor_price and vendor_price != 0:
+                cost = -1 * (( cost / self.product_id.standard_price ) * vendor_price.price)
+            else:
+                cost = -1 * cost      
+            
+            journal_id, acc_src, acc_dest, acc_valuation = self._get_accounting_data_for_valuation()
+            if location_to and location_to.usage == 'supplier':  # goods returned to supplier
+                self.with_context(force_company=company_from.id)._create_account_move_line(acc_valuation, acc_src, journal_id, qty, description, svl_id, cost)
+            else:
+                self.with_context(force_company=company_from.id)._create_account_move_line(acc_valuation, acc_dest, journal_id, qty, description, svl_id, cost)
+
+        if self.company_id.anglo_saxon_accounting:
+            # Creates an account entry from stock_input to stock_output on a dropship move. https://github.com/odoo/odoo/issues/12687
+            journal_id, acc_src, acc_dest, acc_valuation = self._get_accounting_data_for_valuation()
+            if self._is_dropshipped():
+                if cost > 0:
+                    self.with_context(force_company=self.company_id.id)._create_account_move_line(acc_src, acc_valuation, journal_id, qty, description, svl_id, cost)
+                else:
+                    cost = -1 * cost
+                    self.with_context(force_company=self.company_id.id)._create_account_move_line(acc_valuation, acc_dest, journal_id, qty, description, svl_id, cost)
+            elif self._is_dropshipped_returned():
+                if cost > 0:
+                    self.with_context(force_company=self.company_id.id)._create_account_move_line(acc_valuation, acc_src, journal_id, qty, description, svl_id, cost)
+                else:
+                    cost = -1 * cost
+                    self.with_context(force_company=self.company_id.id)._create_account_move_line(acc_dest, acc_valuation, journal_id, qty, description, svl_id, cost)
+
+        if self.company_id.anglo_saxon_accounting:
+            #eventually reconcile together the invoice and valuation accounting entries on the stock interim accounts
+            self._get_related_invoices()._stock_account_anglo_saxon_reconcile_valuation(product=self.product_id)
