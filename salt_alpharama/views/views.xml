@@ -43,6 +43,48 @@
 
         </field>
     </record>
+    
+    <record id="skin_salt_master_form" model="ir.ui.view">
+		<field name="name">skin.salt.master.form</field>
+		<field name="model">skin.salt.master</field>
+		<field name="arch" type="xml">
+		<form>
+			<sheet>
+				<group>
+					<field name="skin_type" options="{'no_quick_create':True}"/>
+					<field name="salt_qty"/>
+				</group>
+			</sheet>
+			
+            <sheet>
+                <div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+					<field name="message_ids" widget="mail_thread"/>
+                </div>
+            </sheet>
+		</form>
+		</field>
+	</record>
 
+    <record id="skin_salt_master_tree" model="ir.ui.view">
+		<field name="name">skin.salt.master.tree</field>
+		<field name="model">skin.salt.master</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="skin_type"/>
+				<field name="salt_qty"/>
+			</tree>
+		</field>
+	</record>
+    
+    <record id="skin_salt_master_window" model="ir.actions.act_window">
+      <field name="type">ir.actions.act_window</field>
+      <field name="name">Skin Salt Master</field>
+      <field name="res_model">skin.salt.master</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="skin_salt_master_menu" action="salt_alpharama.skin_salt_master_window" parent="stock.menu_stock_config_settings" sequence="0" />
+	
 </odoo>
 
