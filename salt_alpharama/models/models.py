@@ -117,3 +117,12 @@ class StockMove(models.Model):
         if self.company_id.anglo_saxon_accounting:
             #eventually reconcile together the invoice and valuation accounting entries on the stock interim accounts
             self._get_related_invoices()._stock_account_anglo_saxon_reconcile_valuation(product=self.product_id)
+            
+            
+class SkinSaltMaster(models.Model):
+    _name = 'skin.salt.master'
+    _rec_name = 'skin_type'
+    _inherit = 'mail.thread'
+    
+    skin_type = fields.Many2one('product.product', string='Skin Type', track_visibility='onchange')
+    salt_qty = fields.Float('Salt Quantity', track_visibility='onchange')
