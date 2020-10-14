@@ -10,7 +10,11 @@
       <field name="inherit_id" ref="hr.view_employee_form" />
       <field name="arch" type="xml">
 
+<<<<<<< HEAD
         <xpath expr="//page[2]/group[1]/group[2]" position="after">
+=======
+        <xpath expr="//page[@name='personal_information']/group/group" position="after">
+>>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
           <group string="Bank Details">
             <field name="bank_name" />
             <field name="bank_branch" />

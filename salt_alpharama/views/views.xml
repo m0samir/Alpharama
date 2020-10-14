@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id='view_stock_landed_cost_form' model='ir.ui.view'>
+        <field name="name">stock.landed.cost.form</field>
+        <field name="model">stock.landed.cost</field>
+        <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+        <field name="arch" type="xml">
+            
+            <field name="picking_ids" position="after">
+                <field name="internal_transfer" options="{'no_quick_create':True,'no_create_edit':True, 'no_open': True,
+                                        'no_show':True, 'no_create':True,}"/>
+                <button string="Get Cost Lines" name="compute_internal_transfer" attrs="{'invisible':[('state','!=','draft')]}" type="object" class="oe_highlight"/>
+            </field>
+
+        </field>
+    </record>
+    
+    <record id='product_supplierinfo_form_view_inherit' model='ir.ui.view'>
+        <field name="name">product.supplierinfo.form</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="product_tmpl_id" position="before">
+                <label for="price_percentage"/>
+                <div>
+                <field name="price_percentage"/>
+                </div>
+            </field>
+
+        </field>
+    </record>
+    
+    <record id='view_location_form_inherit' model='ir.ui.view'>
+        <field name="name">stock.location.form</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+
+            <field name="valuation_in_account_id" position="replace">
+                <field name="valuation_in_account_id" options="{'no_create': True}"/>
+            </field>
+
+        </field>
+    </record>
+    
+    <record id="skin_salt_master_form" model="ir.ui.view">
+		<field name="name">skin.salt.master.form</field>
+		<field name="model">skin.salt.master</field>
+		<field name="arch" type="xml">
+		<form>
+			<sheet>
+				<group col='4'>
+					<field name="skin_type" options="{'no_quick_create':True}"/>
+					<field name="salt_qty"/>
+				</group>
+			</sheet>
+			
+            <sheet>
+                <div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+					<field name="message_ids" widget="mail_thread"/>
+                </div>
+            </sheet>
+		</form>
+		</field>
+	</record>
+
+    <record id="skin_salt_master_tree" model="ir.ui.view">
+		<field name="name">skin.salt.master.tree</field>
+		<field name="model">skin.salt.master</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="skin_type"/>
+				<field name="salt_qty"/>
+			</tree>
+		</field>
+	</record>
+    
+    <record id="skin_salt_master_window" model="ir.actions.act_window">
+      <field name="type">ir.actions.act_window</field>
+      <field name="name">Skin Salt Master</field>
+      <field name="res_model">skin.salt.master</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="skin_salt_master_menu" action="salt_alpharama.skin_salt_master_window" parent="stock.menu_stock_config_settings" sequence="0" />
+    
+<!--     <record id="purchase_id_for_quantity" model="ir.ui.view">
+        <field name="name">stock.picking.inherits.forms</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page/field[@name='move_line_ids_without_package']/tree/field[@name='product_id']" position="before">
+                <field name="purchase_order"/>
+            </xpath>
+        </field>
+    </record> -->
+    
+    <record id="purchase_order_for_quantity" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.po</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="purchase_order" attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
+            </xpath>
+        </field>
+    </record>
+	
+</odoo>
+

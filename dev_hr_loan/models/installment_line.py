@@ -4,7 +4,11 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
 #
+<<<<<<< HEAD
 #    For Module Support : devintelle@gmail.com  or Skype : devintelle
+=======
+#    For Module Support : devintelle@gmail.com  or Skype : devintelle 
+>>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
 #
 ##############################################################################
 
@@ -17,7 +21,11 @@ from dateutil.relativedelta import relativedelta
 class installment_line(models.Model):
     _name = 'installment.line'
     _order = 'date,name'
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
     name = fields.Char('Name')
     employee_id = fields.Many2one('hr.employee',string='Employee')
     loan_id = fields.Many2one('employee.loan',string='Loan',required="1", ondelete='cascade')
@@ -30,15 +38,26 @@ class installment_line(models.Model):
     total_installment = fields.Float('Total',compute='get_total_installment')
     payslip_id = fields.Many2one('hr.payslip',string='Payslip')
     is_skip = fields.Boolean('Skip Installment')
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
     @api.depends('installment_amt','ins_interest')
     def get_total_installment(self):
         for line in self:
             line.total_installment = line.ins_interest + line.installment_amt
+<<<<<<< HEAD
 
 
 
     # @api.multi
+=======
+            
+            
+        
+    
+>>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
     def send_paid_mail(self):
         if self.employee_id and self.employee_id.work_email:
             template_id = self.env['ir.model.data'].get_object_reference('dev_hr_loan',
@@ -47,17 +66,29 @@ class installment_line(models.Model):
             template_id = self.env['mail.template'].browse(template_id[1])
             template_id.send_mail(self.ids[0], True)
         return True
+<<<<<<< HEAD
 
     # @api.multi
+=======
+    
+    
+>>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
     def action_view_payslip(self):
         if self.payslip_id:
             return {
                 'view_mode': 'form',
                 'res_id': self.payslip_id.id,
                 'res_model': 'hr.payslip',
+<<<<<<< HEAD
                 'binding_view_types': 'form',
                 'type': 'ir.actions.act_window',
 
             }
 
+=======
+                'type': 'ir.actions.act_window',
+                
+            }
+            
+>>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
