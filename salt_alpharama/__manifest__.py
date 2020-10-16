@@ -8,6 +8,8 @@
 	'depends': ['stock_landed_costs'],
     'data': [
         'views/views.xml',
+        'security/ir.model.access.csv',
+        'security/account_security.xml',
     ],
 
     'installable': True,
