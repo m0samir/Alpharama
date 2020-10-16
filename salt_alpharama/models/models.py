@@ -139,11 +139,11 @@ class StockMoveLine(models.Model):
                     
     @api.onchange('product_id', 'product_uom_id')
     def onchange_product_id(self):
-        if self.picking_id.purchase_order:
+        if self.picking_id.purchase_order and self.product_id:
             for rec in self.picking_id.purchase_order.move_ids_without_package:
                 skin_salt_qty = self.env['skin.salt.master'].search([('skin_type', '=', rec.product_id.id)], limit=1)
                 if skin_salt_qty:
-                    self.qty_done = skin_salt_qty.salt_qty
+                    self.qty_done = skin_salt_qty.salt_qty * rec.quantity_done
                 else:
                     self.qty_done = 0
         if self.product_id:
@@ -162,3 +162,12 @@ class StockMoveLine(models.Model):
         else:
             res = {'domain': {'product_uom_id': []}}
         return res
+    
+
+class ProductTemplate(models.Model):
+    _inherit="product.template"
+    
+    def set_access_for_product(self):
+        self.able_to_see_product_cost = self.env['res.users'].has_group('salt_alpharama.group_cost_access')
+
+    able_to_see_product_cost = fields.Boolean(default=False, compute='set_access_for_product', string='Is user able to modify product?')
