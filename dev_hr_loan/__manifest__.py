@@ -4,11 +4,11 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
 #
-<<<<<<< HEAD
+# <<<<<<< HEAD
 #    For Module Support : devintelle@gmail.com  or Skype : devintelle
 =======
 #    For Module Support : devintelle@gmail.com  or Skype : devintelle 
->>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
+# >>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
 #
 ##############################################################################
 
