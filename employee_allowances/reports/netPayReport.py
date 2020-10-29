@@ -152,7 +152,7 @@ class PayrollReports(models.Model):
                     total_gross_pay = slip.line_ids.search([('salary_rule_id', '=', rec.env.ref(
                         'hr_ke.ke_rule30').id),  ('slip_id', '=', slip.id)],  limit=1).total or 0.0
                     total_taxable = slip.line_ids.search([('salary_rule_id', '=',  rec.env.ref(
-                        'hr_ke.ke_rule45').id), ('slip_id', '=', slip.id)], limit=1).total or 0.0
+                        'hr_ke.ke_rule81').id), ('slip_id', '=', slip.id)], limit=1).total or 0.0
                     house_allowance = slip.line_ids.search([('salary_rule_id', '=', rec.env.ref(
                         'hr_ke.ke_rule17').id), ('slip_id', '=', slip.id)],  limit=1).total or 0.0
                     basic_pay = slip.line_ids.search([('salary_rule_id', '=', rec.env.ref(
