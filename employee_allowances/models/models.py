@@ -60,12 +60,12 @@ class HrPayslip(models.Model):
     def action_payslip_done(self):
         # execute original code
         res = super().action_payslip_done()
+        for record in self:
+            deductions = self.env['ke.deductions'].search(
+                [('employee_id', '=', record.employee_id.id)])
 
-        deductions = self.env['ke.deductions'].search(
-            [('employee_id', '=', self.employee_id.id)])
-
-        allowances = self.env['ke.cash_allowances'].search(
-            [('contract_id', '=', self.contract_id.id)])
+            allowances = self.env['ke.cash_allowances'].search(
+                [('contract_id', '=', record.contract_id.id)])
 
         for rec in deductions:
             deduction = self.env['ke.deductions.type'].search(
@@ -139,3 +139,10 @@ class KeBatchDeductionIds(models.Model):
         related='deduction_type_id.rule_id', string="Salary Rule")
     amount = fields.Float(string='Amount')
     deduction_id = fields.Many2one('ke.batch.deduction', string='Deduction Id')
+
+
+class KEPayrollSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    employer_bank_account = fields.Char(
+        'Employer Bank Account.', required=True)
