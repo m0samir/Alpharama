@@ -6,7 +6,7 @@
 #
 # <<<<<<< HEAD
 #    For Module Support : devintelle@gmail.com  or Skype : devintelle
-=======
+# =======
 #    For Module Support : devintelle@gmail.com  or Skype : devintelle 
 # >>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
 #
