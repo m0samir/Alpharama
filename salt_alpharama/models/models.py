@@ -25,7 +25,7 @@ class LandedCost(models.Model):
                     'product_id': record.product_id.id,
                     'name': record.product_id.name or '',
                     'split_method': 'equal',
-                    'price_unit': vendor_price.price * record.qty_done or 0.0 if vendor_price else record.product_id.standard_price * record.qty_done or 0.0,
+                    'price_unit': (record.product_id.standard_price - vendor_price.price) * record.qty_done or 0.0 if vendor_price else record.product_id.standard_price * record.qty_done or 0.0,
                     'account_id': record.product_id.property_account_expense_id.id or       record.product_id.categ_id.property_account_expense_categ_id.id,
                     'cost_id': rec.id,
                     })  
