@@ -19,17 +19,13 @@
     'category': 'Generic Modules/Human Resources',
     'description': """
         odod Apps will add Hr Employee Loan functioality for employee
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
 Employee loan management
 Odoo employee loan management
 HR employee loan
 Odoo HR employee loan
 HR loan for employee
-<<<<<<< HEAD
+
 HR loan approval functionality
 Loan Installment link with employee payslip
 Loan notification employee Inbox
@@ -39,7 +35,7 @@ Manage employee loan odoo
 Manage HR loan for employee
 Manage HR loan for employee odoo
 Loan management
-=======
+
 HR loan approval functionality 
 Loan Installment link with employee payslip
 Loan notification employee Inbox
@@ -49,7 +45,7 @@ Manage employee loan odoo
 Manage HR loan for employee
 Manage HR loan for employee odoo
 Loan management 
->>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
+
 Odoo loan management
 Odoo loan management system
 Odoo loan management app
@@ -63,11 +59,11 @@ Open HRMS Loan Management
 Loan accounting
 Odoo loan accounting
 Employee can create loan request.
-<<<<<<< HEAD
+
 Manage Employee Loan and Integrated with Payroll
-=======
+
 Manage Employee Loan and Integrated with Payroll        
->>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
+
     """,
     'summary':'odoo app will add Hr Employee Loan functioality for employee',
     'depends': ['hr_payroll','hr_payroll_account'],
@@ -92,18 +88,16 @@ Manage Employee Loan and Integrated with Payroll
         'views/hr_loan_dashbord.xml',
         'views/loan_document.xml',
         'views/loan_report_views.xml',
-<<<<<<< HEAD
 
-=======
         
->>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
+
     ],
     'demo': [],
     'test': [],
     'css': [],
     'qweb': [],
     'js': [],
-<<<<<<< HEAD
+
     # 'images': ['images/main_screenshot.png'],
     'installable': True,
     'application': True,
@@ -113,7 +107,7 @@ Manage Employee Loan and Integrated with Payroll
     'author': 'DevIntelle Consulting Service Pvt.Ltd',
     'website': 'http://www.devintellecs.com',
     'maintainer': 'DevIntelle Consulting Service Pvt.Ltd',
-=======
+
     'images': ['images/main_screenshot.png'],
     'installable': True,
     'application': True,
@@ -123,7 +117,7 @@ Manage Employee Loan and Integrated with Payroll
     'author': 'DevIntelle Consulting Service Pvt.Ltd',
     'website': 'http://www.devintellecs.com',    
     'maintainer': 'DevIntelle Consulting Service Pvt.Ltd', 
->>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
+
     'support': 'devintelle@gmail.com',
     'price':59.0,
     'currency':'EUR',
