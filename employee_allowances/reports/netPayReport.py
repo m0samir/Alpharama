@@ -185,7 +185,7 @@ class PayrollReports(models.Model):
                         'hr_ke.ke_rule120').id), ('slip_id', '=', slip.id)], limit=1).total
 
                     data.append({
-                        'payroll_no': int(slip.employee_id.payroll_no) or 0,
+                        'payroll_no': slip.employee_id.payroll_no),
                         'last_name': slip.employee_id.display_name.split(' ')[-1] or None,
                         'first_name': slip.employee_id.display_name.split(' ')[0] or None,
                         'department': slip.employee_id.department_id.name or None,
