@@ -1,6 +1,35 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
   <data noupdate="0">
+
+    <!-- hr.employee inherit search view -->
+    <record id="hr_employee_search_view_inherit" model="ir.ui.view">
+      <field name="name">hr.employee.inherit.view.search</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_filter" />
+      <field name="arch" type="xml">
+
+        <xpath expr="//search" position="inside">
+          <field name="payroll_no" filter_domain="[('payroll_no', 'ilike', self)]" />
+        </xpath>
+
+      </field>
+    </record>
+
+    <!-- hr.employee inherit tree view -->
+    <record id="hr_employee_veiw_tree_inherit" model="ir.ui.view">
+      <field name="name">hr.employee.inherit.view.tree</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_tree" />
+      <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="payroll_no" />
+        </xpath>
+
+      </field>
+    </record>
+
     <!-- EXTEND HR EMPLOYEE FORM VIEW -->
     <!-- hr.employee inherit form view -->
 
@@ -9,18 +38,50 @@
       <field name="model">hr.employee</field>
       <field name="inherit_id" ref="hr.view_employee_form" />
       <field name="arch" type="xml">
-
-<<<<<<< HEAD
-        <xpath expr="//page[2]/group[1]/group[2]" position="after">
-=======
+        <!-- //////////////////////////////// -->
+        <xpath expr="//header" position="inside">
+          <button type="action" name="%(action_single_p9_employee_form)d" string='P9 Form' class="oe_secondary" />
+        </xpath>
+        <!-- /////////////////////////////////////////// -->
         <xpath expr="//page[@name='personal_information']/group/group" position="after">
->>>>>>> 6559eaf031b8eb1c6a34277b717674ce81ff44ca
           <group string="Bank Details">
             <field name="bank_name" />
             <field name="bank_branch" />
             <field name="employee_bank_account" />
             <field name="branch_code" />
           </group>
+        </xpath>
+
+      </field>
+    </record>
+
+    <!-- INHERIT HR PAYSLIP RUN -->
+    <!-- hr.payslip.run inherit form view -->
+    <record id="hr_payslip_run_form_inherit" model="ir.ui.view">
+      <field name="name">hr.payslip.run.inherit.view.form</field>
+      <field name="model">hr.payslip.run</field>
+      <field name="inherit_id" ref="hr_payroll_community.hr_payslip_run_form" />
+      <field name="arch" type="xml">
+
+        <xpath expr="//header" position="inside">
+          <button string="Departmental Report" name="deptReport" type="object" class="oe_highlight" />
+        </xpath>
+
+      </field>
+    </record>
+
+    <!-- res.config.settings inherit form view -->
+    <record id="view_hr_ke_config_settings_inherited" model="ir.ui.view">
+      <field name="name">Hr Ke Payroll Settings Inherit</field>
+      <field name="model">res.config.settings</field>
+      <field name="inherit_id" ref="hr_ke.view_hr_ke_config_settings" />
+      <field name="arch" type="xml">
+
+        <xpath expr="//div[@id='hr_payroll_kenya']" position="inside">
+          <div class="o_setting_right_pane">
+            <label for="employer_bank_account" />
+            <field name="employer_bank_account" class="oe_inline" />
+          </div>
         </xpath>
 
       </field>
@@ -84,6 +145,7 @@
     </record>
 
 
+    <menuitem id="hr_employee_employee_p9" name="P9" parent="hr.menu_hr_root" sequence="9" action="action_hr_p9_employee_form" />
     <menuitem id="hr_employee_cash_allowance_menu" name="Allowances" parent="hr.menu_hr_root" sequence="9" />
     <menuitem id="hr_employee_batch_deductions_menu" name="Deductions" parent="hr.menu_hr_root" sequence="9" action="action_batch_deduction" />
 
