@@ -24,6 +24,7 @@
                                 <field name="company_id" groups="base.group_multi_company" invisible="0" />
                                 <field name="department_id" />
                                 <field name="job_id" />
+                                <field name="tax_pin" invisible="1" />
                             </tree>
                         </field>
                     </group>

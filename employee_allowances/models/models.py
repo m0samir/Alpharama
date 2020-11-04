@@ -145,4 +145,4 @@ class KEPayrollSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     employer_bank_account = fields.Char(
-        'Employer Bank Account.', required=False)
+        'Employer Bank Account.', required=True)

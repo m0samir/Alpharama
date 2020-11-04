@@ -7,7 +7,7 @@
             </div>
 
             <div class="row">
-                <t t-set="names" t-value="employee['name'].split()" />
+                <t t-set="names" t-value="p['employee']['name'].split()" />
                 <div class="col d-flex flex-column">
                     <h3 style="font-size: 13px !important">APPENDIX 2A</h3>
                     <br />
@@ -15,7 +15,7 @@
                     <h3 style="font-size: 13px !important">
                         <span>Employer's Name:</span>
                         <strong>
-                            <t t-esc="employer['name']" />
+                            <t t-esc="p['employer']['name']" />
                         </strong>
                     </h3>
                     <h3 style="font-size: 13px !important">
@@ -49,13 +49,13 @@
                     <h3 style="font-size: 13px !important">
                         <span>Employer's Pin:</span>
                         <strong>
-                            <t t-esc="employer['vat']" />
+                            <t t-esc="p['employer']['pin']" />
                         </strong>
                     </h3>
                     <h3 style="font-size: 13px !important">
                         <span>Employee's Pin:</span>
                         <strong>
-                            <t t-esc="employee['vat']" />
+                            <t t-esc="p['employee']['pin']" />
                         </strong>
                     </h3>
                 </div>
@@ -64,6 +64,9 @@
 
 
         <template id="p9_body" name="employee_p9_body">
+            <t t-set="p['body']" t-value="body" />
+            <t t-set="p['ms']" t-value="ms" />
+            <t t-set="p['totals']" t-value="totals" />
             <div class="row">
                 <table class="table mt16 table-sm o_main_table mx-1" style="border:1px solid #ddd; width:100%;">
                     <t t-call="employee_allowances.p9_table_top_head" />
@@ -112,7 +115,6 @@
                                 <td style="border:1px solid #ddd; text-align:center; color: #000; vertical-align:top;">
                                     <t t-esc="body[o]['L']" />
                                 </td>
-                                <!-- <t t-foreach="body[o][0:11]" t-as="j"> <td style="border:1px solid #ddd; text-align:center; color: #000; vertical-align:top;"> <t t-esc="j" /> </td> </t> <td style="border:1px solid #ddd; text-align:center; color: #000; vertical-align:top;" colspan="2"> <t t-esc="body[o][11]" /> </td> <td style="border:1px solid #ddd; text-align:center; color: #000; vertical-align:top;"> <t t-esc="body[o][12]" /> </td> -->
                             </tr>
                         </t>
                         <tr>

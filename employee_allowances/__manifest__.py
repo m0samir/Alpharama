@@ -40,6 +40,7 @@
         'reports/misc.xml',
         'reports/templates.xml',
         'reports/p9.xml',
+        'reports/payslip.xml',
         'reports/report.xml',
     ],
 

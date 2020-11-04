@@ -91,3 +91,14 @@ class HrBonusAndCommission(models.TransientModel):
                 'fixed': rec.allowance_amount,
             }
             self.env['ke.cash_allowances'].sudo().create(vals)
+
+
+class DailyOvertime(models.TransientModel):
+    _name = 'daily.overtime'
+    _description = 'Daily overtime report'
+
+    start_date = fields.Date(string='Start Date')
+    end_date = fields.Date(string='End Date')
+
+    def dailyOvertime(self):
+        pass

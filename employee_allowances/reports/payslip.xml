@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="alpharama_payslip">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+
+                    <div class="page d-flex" style="flex-wrap: wrap;">
+                        <div class="row">
+                            <t t-foreach="data" t-as="d">
+                                <div class="col-4" style="height: 100%">
+
+                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <t t-esc="d['kampuni']['name']" />
+                                        <br />
+                                        <t t-esc="d['kampuni']['street']" />
+                                        <br />
+                                        <t t-esc="d['kampuni']['city']" />
+                                        <br />
+                                        <t t-esc="d['kampuni']['country']" />
+                                    </div>
+                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div>
+                                            Name:
+                                            <t t-esc="d['name']" />
+                                        </div>
+                                        <div>
+                                            Department:
+                                            <t t-esc="d['department']" />
+                                        </div>
+                                        <div>
+                                            Employee No:
+                                            <t t-esc="d['name']" />
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex w-100 justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div>Description</div>
+                                        <div>Amount</div>
+                                    </div>
+
+                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div class="d-flex justify-content-between">
+                                            <span>
+                                                Basic:
+</span>
+                                            <t-span t-esc="d['basic']" />
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>
+                                                Housing:
+</span>
+
+                                            <t-span t-esc="d['house']" />
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div>GROSS PAY</div>
+                                        <div>
+                                            <t t-esc="d['gross']" />
+                                        </div>
+                                    </div>
+                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div class="d-flex justify-content-between">
+                                            <div>PAYE</div>
+                                            <div>
+                                                <t t-esc="d['paye']" />
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>NSSF</div>
+                                            <div>
+                                                <t t-esc="d['nssf']" />
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>NHIF</div>
+                                            <div>
+                                                <t t-esc="d['nhif']" />
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>Salary Advance</div>
+                                            <div>
+                                                <t t-esc="d['advance']" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div>TOTAL DEDUCTIONS</div>
+                                        <div>
+                                            <t t-esc="d['nssf'] + d['nhif'] + d['advance'] + d['paye']" />
+                                        </div>
+                                    </div>
+                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div class="d-flex justify-content-between">
+                                            <div>Contribution(-)</div>
+                                            <div>
+                                                <t t-esc="d['contribution']" />
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>Taxable Income (Ksh)</div>
+                                            <div>
+                                                <t t-esc="d['taxable_income']" />
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>Taxable Chargeable</div>
+                                            <div>
+                                                <t t-esc="d['taxable_charge']" />
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>Relief</div>
+                                            <div>
+                                                <t t-esc="d['relief']" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
+                                        <div>NET PAY</div>
+                                        <div>
+                                            <t t-esc="d['net_pay']" />
+                                        </div>
+                                    </div>
+                                    <hr style="margin-top: 30px; background: #aaa;" />
+                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0; margin: 150px 0 140px 0;">
+                                        <div>Signature</div>
+                                        <div>Bank</div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>
