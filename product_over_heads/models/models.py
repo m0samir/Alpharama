@@ -20,9 +20,10 @@ class ProductOverHeads(models.Model):
         if self.product_oh_line_ids:
             self.total_amount = 0
             self.total_per_sft = 0
-            for rec in self.product_oh_line_ids:
-                self.total_amount += rec.amount
-                self.total_per_sft += rec.per_sft
+            for record in self:
+                for rec in record.product_oh_line_ids:
+                    record.total_amount += rec.amount
+                    record.total_per_sft += rec.per_sft
             
             
 class ProductOverHeadsLine(models.Model):
