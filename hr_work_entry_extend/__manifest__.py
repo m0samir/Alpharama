@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Payroll and HR System For Kenya",
+    'name': "Hr Work Entries For Kenya",
     'license': 'OPL-1',
-    'support': 'support@optima.co.ke',
 
     'summary': """
-        Automated Payroll and HR system customized for Kenya, with KRA reports and automated Tax Returns """,
+        Hr Work Entries For Kenya""",
 
     'description': """
-        In this module, we are adding Kenya specific HR details and requirements for processing payroll. NSSF, NHIF, Next Of Kin, PAYE, HELB and others
+        Hr Work Entries For Kenya
     """,
-    'images': ['static/description/hr.png'],
-    'author': "Optima ICT Services LTD",
-    'website': "http://www.optima.co.ke",
-    'price': 351,
-    'currency': 'EUR',
+    'author': "Thilak",
+    'website': "",
     'category': 'Human Resources',
-    'version': '0.6',
 
     # any module necessary for this one to work correctly
     'depends': ['hr_work_entry'],
