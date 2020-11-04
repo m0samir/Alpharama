@@ -10,24 +10,33 @@ class ProductOverHeads(models.Model):
     _inherit = 'mail.thread'
     _rec_name = "from_date"
     
-    from_date = fields.Date(string="From Date")  
-    to_date = fields.Date(string="To Date")
-    total_amount = fields.Float("Total Amount")
-    total_per_sft = fields.Float("Total Per SFT Amount")
+    from_date = fields.Date(string="From Date", required=True, track_visibility='onchange')  
+    to_date = fields.Date(string="To Date", required=True, track_visibility='onchange')
+    total_amount = fields.Float("Total Amount", compute="_onchange_product_oh_line_ids", readonly=True, track_visibility='onchange')
+    total_per_sft = fields.Float("Total Per SFT Amount", compute="_onchange_product_oh_line_ids", readonly=True, track_visibility='onchange')
     product_oh_line_ids = fields.One2many('product.overheads.line', "product_overheads_id", copy=True)
 
-    
+    def _onchange_product_oh_line_ids(self):
+        if self.product_oh_line_ids:
+            self.total_amount = 0
+            self.total_per_sft = 0
+            for rec in self.product_oh_line_ids:
+                self.total_amount += rec.amount
+                self.total_per_sft += rec.per_sft
+            
+            
 class ProductOverHeadsLine(models.Model):
     _name = 'product.overheads.line'
     _description = "Overheads Details"
 
     product_overheads_id = fields.Many2one("product.overheads")
-    overhead_id = fields.Many2one('overhead.overhead', string="Overhead")
-    amount = fields.Float(string="Amount")
-    per_sft = fields.Float(string="Per SFT Amount")
+    overhead_id = fields.Many2one('overhead.overhead', string="Overhead", required=True)
+    amount = fields.Float(string="Amount", required=True)
+    per_sft = fields.Float(string="Per SFT Amount", required=True)
+        
     
 class OverHeads(models.Model):
     _name = 'overhead.overhead'
     _rec_name = "name"
 
-    name = fields.Char("Name")
+    name = fields.Char("Name", required=True)
