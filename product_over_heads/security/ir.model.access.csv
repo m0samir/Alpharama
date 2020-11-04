@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+id_product_overheads,name_product_overheads,model_product_overheads,base.group_user,1,1,1,1
+id_product_overheads_line,name_product_overheads_line,model_product_overheads_line,base.group_user,1,1,1,1
+id_overhead_overhead,name_overhead_overhead,model_overhead_overhead,base.group_user,1,1,1,1
