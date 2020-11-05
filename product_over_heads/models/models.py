@@ -18,12 +18,6 @@ class ProductOverHeads(models.Model):
     total_sft = fields.Float("Total SFT", required=False, track_visibility='onchange')
     overhead_product = fields.Many2one("product.template", required=False, track_visibility='onchange')
     product_oh_line_ids = fields.One2many('product.overheads.line', "product_overheads_id", copy=True)
-
-    @api.depends('from_date','to_date')
-    def _date_validations(self):
-        for rec in self:
-            rec.total_customer_pay_amount = sum(
-                line.receiving_amt for line in rec.invoice_customer_payments)
             
     def update_product_cost(self):
         if not self.overhead_product:
