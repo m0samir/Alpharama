@@ -52,6 +52,34 @@
 
       </field>
     </record>
+    
+    <!-- hr.payslip inherit search view -->
+    <record id="view_hr_payslip_search_inherit" model="ir.ui.view">
+      <field name="name">hr.payslip.inherit.view.search</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter" />
+      <field name="arch" type="xml">
+
+        <xpath expr="//search" position="inside">
+          <filter string="Department" name="Department" context="{'group_by':'department_id'}" />
+        </xpath>
+
+      </field>
+    </record>
+    
+    <!-- hr.payslip inherit form view -->
+    <record id="view_hr_payslip_forms_inherit" model="ir.ui.view">
+      <field name="name">hr.payslip.inherit.view.search</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+      <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='employee_id']" position="after">
+          <filter name="department_id" invisible="1" />
+        </xpath>
+
+      </field>
+    </record>
 
     <!-- INHERIT HR PAYSLIP RUN -->
     <!-- hr.payslip.run inherit form view -->
