@@ -1,7 +1,6 @@
 from odoo import api, fields, models, _
 from datetime import datetime, date, timedelta
 from odoo.exceptions import ValidationError
-import json
 
 
 class HrEmployee(models.Model):
@@ -67,17 +66,17 @@ class HrPayslip(models.Model):
             allowances = self.env['ke.cash_allowances'].search(
                 [('contract_id', '=', record.contract_id.id)])
 
-        for rec in deductions:
-            deduction = self.env['ke.deductions.type'].search(
-                [('id', '=', rec.deduction_id.id)]).mapped('recurring_deduction')
-            if deduction[0] == False:
-                rec.unlink()
+            for rec in deductions:
+                deduction = self.env['ke.deductions.type'].search(
+                    [('id', '=', rec.deduction_id.id)]).mapped('recurring_deduction')
+                if deduction[0] == False:
+                    rec.unlink()
 
-        for rec in allowances:
-            allowance = self.env['ke.cash.allowances.type'].search(
-                [('id', '=', rec.cash_allowance_id.id)]).mapped('recurring_allowance')
-            if allowance[0] == False:
-                rec.unlink()
+            for rec in allowances:
+                allowance = self.env['ke.cash.allowances.type'].search(
+                    [('id', '=', rec.cash_allowance_id.id)]).mapped('recurring_allowance')
+                if allowance[0] == False:
+                    rec.unlink()
 
         return self.write({'state': 'done'})
 
@@ -146,3 +145,36 @@ class KEPayrollSettings(models.TransientModel):
 
     employer_bank_account = fields.Char(
         'Employer Bank Account.', required=True)
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    box_id = fields.Many2one('product.template',
+                             string='Box', domain=[('isa_box', '=', True)])
+    isa_box = fields.Boolean(string='Is a box?')
+
+
+class ProductPack(models.Model):
+    _inherit = 'pack.products'
+
+    box_id = fields.Many2one('product.template', string='Box', domain=[
+                             ('isa_box', '=', True)])
+
+
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    box_id = fields.Many2one('product.template',
+                             string='Box')
+    product_is_pack = fields.Boolean(string='Is Pack')
+    qty_available = fields.Float(string='Quantity Available')
+
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    box_id = fields.Many2one('product.template',
+                             string='Box')
+    product_is_pack = fields.Boolean(string='Is Pack')
+    qty_available = fields.Float(string='Quantity Available')

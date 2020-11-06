@@ -19,22 +19,23 @@
 
         <record id="payslip_paperformat" model="report.paperformat">
             <field name="name">Payslip Paper Format</field>
-            <field name="default" eval="False" />
-            <field name="format">custom</field>
-            <field name="page_width">279</field>
-            <field name="page_height">241</field>
-            <field name="orientation">Portrait</field>
-            <field name="margin_top">10</field>
-            <field name="margin_bottom">15</field>
-            <field name="margin_left">5</field>
-            <field name="margin_right">10</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">50</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">1</field>
             <field name="header_line" eval="False" />
-            <field name="header_spacing">10</field>
+            <field name="header_spacing">0</field>
             <field name="dpi">90</field>
         </record>
 
         <report id="action_employee_p9_report" model="hr.payslip" string="Employee P9" paperformat="p9_paperformat" report_type="qweb-pdf" name="employee_allowances.employee_p9_report" file="employee_allowances.employee_p9_report" />
         <report id="action_alpharama_payslip" model="hr.payslip" string="Payslip" paperformat="payslip_paperformat" report_type="qweb-pdf" name="employee_allowances.alpharama_payslip" file="employee_allowances.alpharama_payslip" print_report_name="('Payslip - %s' %(object.employee_id.name))" />
 
+        <report id="hr_payroll.report_payslip" model="hr.payslip" menu="False" />
     </data>
 </odoo>

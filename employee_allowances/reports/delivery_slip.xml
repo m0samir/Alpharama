@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+
+        <template id="stock_delivery_slip_box_id_inherit" inherit_id="stock.report_delivery_document">
+
+            <xpath expr="//th[@name='th_sm_quantity']" position="after">
+                <th name="th_sm_box_id">
+                    <strong>Box</strong>
+                </th>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_table']/tbody/tr/td[2]" position="after">
+                <td name="th_sm_box_id">
+                    <span t-field="move.box_id" />
+                </td>
+            </xpath>
+
+
+        </template>
+
+    </data>
+</odoo>

@@ -44,7 +44,6 @@ class AlpharamaPayslip(models.AbstractModel):
                     'hr_ke.ke_rule95').id), ('slip_id', '=', doc.id)],  limit=1).total or 0.0,
                 'net_pay': doc.line_ids.search([('salary_rule_id', '=', self.env.ref(
                     'hr_ke.ke_rule120').id), ('slip_id', '=', doc.id)],  limit=1).total or 0.0,
-
             }
 
             data.append(val)

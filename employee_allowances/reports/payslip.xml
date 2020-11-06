@@ -1,144 +1,417 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data noupdate="0">
-        <template id="alpharama_payslip">
-            <t t-call="web.html_container">
-                <t t-call="web.external_layout">
+    <template id="alpharama_payslip">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
 
-                    <div class="page d-flex" style="flex-wrap: wrap;">
-                        <div class="row">
-                            <t t-foreach="data" t-as="d">
-                                <div class="col-4" style="height: 100%">
+                <div class="page">
+                    <t t-set="i" t-value="0" />
 
-                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <t t-esc="d['kampuni']['name']" />
-                                        <br />
-                                        <t t-esc="d['kampuni']['street']" />
-                                        <br />
-                                        <t t-esc="d['kampuni']['city']" />
-                                        <br />
-                                        <t t-esc="d['kampuni']['country']" />
-                                    </div>
-                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div>
-                                            Name:
-                                            <t t-esc="d['name']" />
-                                        </div>
-                                        <div>
-                                            Department:
-                                            <t t-esc="d['department']" />
-                                        </div>
-                                        <div>
-                                            Employee No:
-                                            <t t-esc="d['name']" />
-                                        </div>
-                                    </div>
+                    <t t-foreach="data" t-as="o">
+                        <table style="width:auto">
+                            <tr t-if="i == o_index">
+                                <td t-if="i &lt; len(data)" style="width:30%;">
+                                    <t t-set="d" t-value="data[i]" />
 
-                                    <div class="d-flex w-100 justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div>Description</div>
-                                        <div>Amount</div>
-                                    </div>
+                                    <table class="table mt16 table-sm o_main_table" style="border:1px solid #ddd; width:100%;">
+                                        <tr style="border-bottom: 1px solid black; padding: 10px 0;">
+                                            <td colspan="2">
+                                                <t t-esc="d['kampuni']['name']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['street']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['city']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['country']" />
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid black; padding: 10px 0; ">
+                                            <td>Name:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['name']" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['department']" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employee No:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['payroll']" />
+                                            </td>
+                                        </tr>
+                                    </table>
 
-                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div class="d-flex justify-content-between">
-                                            <span>
-                                                Basic:
-</span>
-                                            <t-span t-esc="d['basic']" />
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <span>
-                                                Housing:
-</span>
+                                    <table class="table mt16 table-sm o_main_table mx-1" style="border:1px solid #ddd; width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Basic</td>
+                                                <td>
+                                                    <t t-esc="d['basic']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Housing</td>
+                                                <td>
+                                                    <t t-esc="d['house']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gross Pay</td>
+                                                <td>
+                                                    <t t-esc="d['gross']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>PAYE</td>
+                                                <td>
+                                                    <t t-esc="d['paye']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NSSF</td>
+                                                <td>
+                                                    <t t-esc="d['nssf']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NHIF</td>
+                                                <td>
+                                                    <t t-esc="d['nhif']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Salary Advance</td>
+                                                <td>
+                                                    <t t-esc="d['advance']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Deductions</td>
+                                                <td>
+                                                    <t t-esc="d['nssf'] + d['nhif'] + d['advance'] + d['paye']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contribution(-)</td>
+                                                <td>
+                                                    <t t-esc="d['contribution']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Taxable Income (Ksh)</td>
+                                                <td>
+                                                    <t t-esc="d['taxable_income']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Taxable Chargeable</td>
+                                                <td>
+                                                    <t t-esc="d['taxable_charge']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Relief</td>
+                                                <td>
+                                                    <t t-esc="d['relief']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NetPay</td>
+                                                <td>
+                                                    <t t-esc="d['net_pay']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Signature</td>
+                                                <td>Bank</td>
+                                            </tr>
 
-                                            <t-span t-esc="d['house']" />
-                                        </div>
-                                    </div>
+                                        </tbody>
+                                    </table>
+                                    <t t-set="i" t-value="i+1" />
+                                </td>
 
-                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div>GROSS PAY</div>
-                                        <div>
-                                            <t t-esc="d['gross']" />
-                                        </div>
-                                    </div>
-                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div class="d-flex justify-content-between">
-                                            <div>PAYE</div>
-                                            <div>
-                                                <t t-esc="d['paye']" />
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <div>NSSF</div>
-                                            <div>
-                                                <t t-esc="d['nssf']" />
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <div>NHIF</div>
-                                            <div>
-                                                <t t-esc="d['nhif']" />
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <div>Salary Advance</div>
-                                            <div>
-                                                <t t-esc="d['advance']" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                <td style="width:5%;"></td>
 
-                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div>TOTAL DEDUCTIONS</div>
-                                        <div>
-                                            <t t-esc="d['nssf'] + d['nhif'] + d['advance'] + d['paye']" />
-                                        </div>
-                                    </div>
-                                    <div style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div class="d-flex justify-content-between">
-                                            <div>Contribution(-)</div>
-                                            <div>
-                                                <t t-esc="d['contribution']" />
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <div>Taxable Income (Ksh)</div>
-                                            <div>
-                                                <t t-esc="d['taxable_income']" />
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <div>Taxable Chargeable</div>
-                                            <div>
-                                                <t t-esc="d['taxable_charge']" />
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <div>Relief</div>
-                                            <div>
-                                                <t t-esc="d['relief']" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                <td t-if="i &lt; len(data)" style="width:30%;">
+                                    <t t-set="d" t-value="data[i]" />
 
-                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0;">
-                                        <div>NET PAY</div>
-                                        <div>
-                                            <t t-esc="d['net_pay']" />
-                                        </div>
-                                    </div>
-                                    <hr style="margin-top: 30px; background: #aaa;" />
-                                    <div class="d-flex justify-content-between" style="border-bottom: 1px solid black; padding: 10px 0; margin: 150px 0 140px 0;">
-                                        <div>Signature</div>
-                                        <div>Bank</div>
-                                    </div>
-                                </div>
-                            </t>
-                        </div>
-                    </div>
-                </t>
+                                    <table class="table mt16 table-sm o_main_table" style="border:1px solid #ddd; width:100%;">
+                                        <tr style="border-bottom: 1px solid black; padding: 10px 0;">
+                                            <td colspan="2">
+                                                <t t-esc="d['kampuni']['name']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['street']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['city']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['country']" />
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid black; padding: 10px 0; ">
+                                            <td>Name:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['name']" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['department']" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employee No:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['payroll']" />
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="table mt16 table-sm o_main_table mx-1" style="border:1px solid #ddd; width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Basic</td>
+                                                <td>
+                                                    <t t-esc="d['basic']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Housing</td>
+                                                <td>
+                                                    <t t-esc="d['house']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gross Pay</td>
+                                                <td>
+                                                    <t t-esc="d['gross']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>PAYE</td>
+                                                <td>
+                                                    <t t-esc="d['paye']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NSSF</td>
+                                                <td>
+                                                    <t t-esc="d['nssf']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NHIF</td>
+                                                <td>
+                                                    <t t-esc="d['nhif']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Salary Advance</td>
+                                                <td>
+                                                    <t t-esc="d['advance']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Deductions</td>
+                                                <td>
+                                                    <t t-esc="d['nssf'] + d['nhif'] + d['advance'] + d['paye']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contribution(-)</td>
+                                                <td>
+                                                    <t t-esc="d['contribution']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Taxable Income (Ksh)</td>
+                                                <td>
+                                                    <t t-esc="d['taxable_income']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Taxable Chargeable</td>
+                                                <td>
+                                                    <t t-esc="d['taxable_charge']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Relief</td>
+                                                <td>
+                                                    <t t-esc="d['relief']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NetPay</td>
+                                                <td>
+                                                    <t t-esc="d['net_pay']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Signature</td>
+                                                <td>Bank</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <t t-set="i" t-value="i+1" />
+                                </td>
+                                <td style="width:5%;"></td>
+
+                                <td t-if="i &lt; len(data)" style="width:30%;">
+                                    <t t-set="d" t-value="data[i]" />
+
+                                    <table class="table mt16 table-sm o_main_table" style="border:1px solid #ddd; width:100%;">
+                                        <tr style="border-bottom: 1px solid black; padding: 10px 0;">
+                                            <td colspan="2">
+                                                <t t-esc="d['kampuni']['name']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['street']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['city']" />
+                                                <br />
+                                                <t t-esc="d['kampuni']['country']" />
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid black; padding: 10px 0; ">
+                                            <td>Name:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['name']" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['department']" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employee No:</td>
+                                            <td class="text-right ">
+                                                <t t-esc="d['payroll']" />
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="table mt16 table-sm o_main_table mx-1" style="border:1px solid #ddd; width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Basic</td>
+                                                <td>
+                                                    <t t-esc="d['basic']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Housing</td>
+                                                <td>
+                                                    <t t-esc="d['house']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gross Pay</td>
+                                                <td>
+                                                    <t t-esc="d['gross']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>PAYE</td>
+                                                <td>
+                                                    <t t-esc="d['paye']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NSSF</td>
+                                                <td>
+                                                    <t t-esc="d['nssf']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NHIF</td>
+                                                <td>
+                                                    <t t-esc="d['nhif']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Salary Advance</td>
+                                                <td>
+                                                    <t t-esc="d['advance']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Deductions</td>
+                                                <td>
+                                                    <t t-esc="d['nssf'] + d['nhif'] + d['advance'] + d['paye']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contribution(-)</td>
+                                                <td>
+                                                    <t t-esc="d['contribution']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Taxable Income (Ksh)</td>
+                                                <td>
+                                                    <t t-esc="d['taxable_income']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Taxable Chargeable</td>
+                                                <td>
+                                                    <t t-esc="d['taxable_charge']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Relief</td>
+                                                <td>
+                                                    <t t-esc="d['relief']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NetPay</td>
+                                                <td>
+                                                    <t t-esc="d['net_pay']" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Signature</td>
+                                                <td>Bank</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <t t-set="i" t-value="i+1" />
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+
+                </div>
             </t>
+        </t>
 
-        </template>
-    </data>
+    </template>
 </odoo>
