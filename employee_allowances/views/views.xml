@@ -39,9 +39,7 @@
       <field name="inherit_id" ref="hr.view_employee_form" />
       <field name="arch" type="xml">
         <!-- //////////////////////////////// -->
-        <xpath expr="//header" position="inside">
-          <button type="action" name="%(action_single_p9_employee_form)d" string='P9 Form' class="oe_secondary" />
-        </xpath>
+        <!-- <xpath expr="//header" position="inside"> <button type="action" name="%(action_single_p9_employee_form)d" string='P9 Form' class="oe_secondary" /> </xpath> -->
         <!-- /////////////////////////////////////////// -->
         <xpath expr="//page[@name='personal_information']/group/group" position="after">
           <group string="Bank Details">
@@ -60,8 +58,8 @@
     <record id="hr_payslip_run_form_inherit" model="ir.ui.view">
       <field name="name">hr.payslip.run.inherit.view.form</field>
       <field name="model">hr.payslip.run</field>
-<!--       <field name="inherit_id" ref="hr_payroll_community.hr_payslip_run_form" /> -->
-      <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form" />
+      <field name="inherit_id" ref="hr_payroll_community.hr_payslip_run_form" />
+      <!-- <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form" /> -->
       <field name="arch" type="xml">
 
         <xpath expr="//header" position="inside">
@@ -151,7 +149,7 @@
     </record>
 
 
-    <menuitem id="hr_employee_employee_p9" name="P9" parent="hr.menu_hr_root" sequence="9" action="action_hr_p9_employee_form" />
+    <!-- <menuitem id="hr_employee_employee_p9" name="P9" parent="hr.menu_hr_root" sequence="9" action="action_hr_p9_employee_form" /> -->
     <menuitem id="hr_employee_cash_allowance_menu" name="Allowances" parent="hr.menu_hr_root" sequence="9" />
     <menuitem id="hr_employee_batch_deductions_menu" name="Deductions" parent="hr.menu_hr_root" sequence="9" action="action_batch_deduction" />
 
