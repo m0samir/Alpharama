@@ -147,34 +147,34 @@ class KEPayrollSettings(models.TransientModel):
         'Employer Bank Account.', required=True)
 
 
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+# class ProductTemplate(models.Model):
+#     _inherit = 'product.template'
 
-    box_id = fields.Many2one('product.template',
-                             string='Box', domain=[('isa_box', '=', True)])
-    isa_box = fields.Boolean(string='Is a box?')
-
-
-class ProductPack(models.Model):
-    _inherit = 'pack.products'
-
-    box_id = fields.Many2one('product.template', string='Box', domain=[
-                             ('isa_box', '=', True)])
+#     box_id = fields.Many2one('product.template',
+#                              string='Box', domain=[('isa_box', '=', True)])
+#     isa_box = fields.Boolean(string='Is a box?')
 
 
-class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+# class ProductPack(models.Model):
+#     _inherit = 'pack.products'
 
-    box_id = fields.Many2one('product.template',
-                             string='Box')
-    product_is_pack = fields.Boolean(string='Is Pack')
-    qty_available = fields.Float(string='Quantity Available')
+#     box_id = fields.Many2one('product.template', string='Box', domain=[
+#                              ('isa_box', '=', True)])
 
 
-class StockMove(models.Model):
-    _inherit = 'stock.move'
+# class StockPicking(models.Model):
+#     _inherit = 'stock.picking'
 
-    box_id = fields.Many2one('product.template',
-                             string='Box')
-    product_is_pack = fields.Boolean(string='Is Pack')
-    qty_available = fields.Float(string='Quantity Available')
+#     box_id = fields.Many2one('product.template',
+#                              string='Box')
+#     product_is_pack = fields.Boolean(string='Is Pack')
+#     qty_available = fields.Float(string='Quantity Available')
+
+
+# class StockMove(models.Model):
+#     _inherit = 'stock.move'
+
+#     box_id = fields.Many2one('product.template',
+#                              string='Box')
+#     product_is_pack = fields.Boolean(string='Is Pack')
+#     qty_available = fields.Float(string='Quantity Available')

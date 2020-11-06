@@ -127,48 +127,12 @@
 
     <!-- PRODUCT PACK -->
     <!-- product.templateproduct_template_inherits_pack inherit form view -->
-    <record id="product_template_inherits_pack" model="ir.ui.view">
-      <field name="name">product.template.inherit.view.form</field>
-      <field name="model">product.template</field>
-      <field name="inherit_id" ref="product_combo_pack.product_template_inherit_pack" />
-      <field name="arch" type="xml">
 
-        <xpath expr="//div[@name='options']" position="inside">
-          <div>
-            <field name="isa_box" />
-            <label for="isa_box" />
-          </div>
-        </xpath>
-
-        <xpath expr="//field[@name='product_id']" position="after">
-          <field name="box_id" />
-        </xpath>
-
-      </field>
-    </record>
+    <!-- <record id="product_template_inherits_pack" model="ir.ui.view"> <field name="name">product.template.inherit.view.form</field> <field name="model">product.template</field> <field name="inherit_id" ref="product_combo_pack.product_template_inherit_pack" /> <field name="arch" type="xml"> <xpath expr="//div[@name='options']" position="inside"> <div> <field name="isa_box" /> <label for="isa_box" /> </div> </xpath> <xpath expr="//field[@name='product_id']" position="after"> <field name="box_id" /> </xpath> </field> </record> -->
 
     <!-- STOCK MOVE -->
     <!-- stock.move inherit form view -->
-    <record id="view_picking_form_inherits" model="ir.ui.view">
-      <field name="name">stock.picking.inherit.view.form</field>
-      <field name="model">stock.picking</field>
-      <field name="inherit_id" ref="stock.view_picking_form" />
-      <field name="arch" type="xml">
-
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]/field[@name='move_ids_without_package']/tree[1]/field[@name='product_id']" position="after">
-          <field name="box_id" />
-        </xpath>
-
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]/field[@name='move_ids_without_package']/tree[1]/field[@name='quantity_done']" position="after">
-          <field name="qty_available" />
-        </xpath>
-
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]/field[@name='move_ids_without_package']/tree[1]" position="attributes">
-          <attribute name="colors">yellow:product_is_pack==True;</attribute>
-        </xpath>
-
-      </field>
-    </record>
+    <!-- <record id="view_picking_form_inherits" model="ir.ui.view"> <field name="name">stock.picking.inherit.view.form</field> <field name="model">stock.picking</field> <field name="inherit_id" ref="stock.view_picking_form" /> <field name="arch" type="xml"> <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]/field[@name='move_ids_without_package']/tree[1]/field[@name='product_id']" position="after"> <field name="box_id" /> </xpath> <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]/field[@name='move_ids_without_package']/tree[1]/field[@name='quantity_done']" position="after"> <field name="qty_available" /> </xpath> <xpath expr="//form[1]/sheet[1]/notebook[1]/page[3]/field[@name='move_ids_without_package']/tree[1]" position="attributes"> <attribute name="colors">yellow:product_is_pack==True;</attribute> </xpath> </field> </record> -->
 
 
     <record id="action_batch_deduction" model="ir.actions.act_window">

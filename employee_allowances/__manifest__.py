@@ -21,7 +21,8 @@
     'version': '13.0.0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['hr', 'hr_ke', 'product_combo_pack', 'stock'],
+    'depends': ['hr', 'hr_ke', 'stock'],
+    # 'depends': ['hr', 'hr_ke', 'product_combo_pack', 'stock'],
 
     # always loaded
     'data': [
@@ -41,7 +42,7 @@
         'reports/templates.xml',
         'reports/p9.xml',
         'reports/payslip.xml',
-        'reports/delivery_slip.xml',
+        # 'reports/delivery_slip.xml',
         'reports/report.xml',
     ],
 
