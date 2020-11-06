@@ -55,7 +55,9 @@ class HrContract(models.Model):
 
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
-
+    
+    department_id = fields.Many2one(related='employee_id.department_id', string='Department',store=True)
+    
     def action_payslip_done(self):
         # execute original code
         res = super().action_payslip_done()
