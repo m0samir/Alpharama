@@ -13,19 +13,14 @@
     'depends': ['base', 'stock', 'mrp',
                 ],
     'data': [
-        
-        
         'views/mrp_bom_views.xml',
         'views/mrp_production_views.xml',
         'views/stock_production_lot_views.xml',
         'views/stock_picking_views.xml',
         'views/stock_move_line_views.xml',
-		'views/product_views.xml',
+	'views/product_views.xml',
         'report/mrp_production_templates.xml',
-      
-		
-
-        
+        'views/vendor.xml',
     ],
     
     'installable': True,
