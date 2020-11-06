@@ -36,6 +36,6 @@
         <report id="action_employee_p9_report" model="hr.payslip" string="Employee P9" paperformat="p9_paperformat" report_type="qweb-pdf" name="employee_allowances.employee_p9_report" file="employee_allowances.employee_p9_report" />
         <report id="action_alpharama_payslip" model="hr.payslip" string="Payslip" paperformat="payslip_paperformat" report_type="qweb-pdf" name="employee_allowances.alpharama_payslip" file="employee_allowances.alpharama_payslip" print_report_name="('Payslip - %s' %(object.employee_id.name))" />
 
-        <report id="hr_payroll.report_payslip" model="hr.payslip" menu="False" />
+<!--         <report id="hr_payroll.report_payslip" model="hr.payslip" menu="False" /> -->
     </data>
 </odoo>
