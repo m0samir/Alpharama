@@ -13,6 +13,7 @@
     'depends': ['base', 'stock', 'mrp',
                 ],
     'data': [
+        'security/ir.model.access.csv',
         'views/mrp_bom_views.xml',
         'views/mrp_production_views.xml',
         'views/stock_production_lot_views.xml',
@@ -21,6 +22,7 @@
 	'views/product_views.xml',
         'report/mrp_production_templates.xml',
         'views/vendor.xml',
+        'views/invoice.xml',
     ],
     
     'installable': True,
