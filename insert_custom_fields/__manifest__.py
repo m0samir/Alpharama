@@ -10,7 +10,7 @@
                    Insert custom fields in core odoo modules
                  """,
 
-    'depends': ['base', 'stock', 'mrp',
+    'depends': ['base', 'stock', 'mrp', 'purchase',
                 ],
     'data': [
         'security/ir.model.access.csv',
@@ -23,6 +23,7 @@
         'report/mrp_production_templates.xml',
         'views/vendor.xml',
         'views/invoice.xml',
+        'views/purchase.xml',
     ],
     
     'installable': True,

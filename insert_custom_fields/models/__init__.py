@@ -10,3 +10,4 @@ from . import stock_production_lot
 from . import product
 from . import vendor
 from . import invoice
+from . import purchase
