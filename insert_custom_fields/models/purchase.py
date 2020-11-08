@@ -9,7 +9,11 @@ from odoo import api, fields, models, _
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
     
-    expected_arrival = fields.Datetime(string='Expected Arrival')
+    expected_arrival = fields.Datetime(string='Expected Arrival', states = {
+        'purchase': [('readonly', True)],
+        'done': [('readonly', True)],
+        'cancel': [('readonly', True)],
+    })
     
 
 class StockPicking(models.Model):
